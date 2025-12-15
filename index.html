@@ -604,6 +604,21 @@ header .intro p {
   padding: 20px; /* un poco menos que 30px */
 }
 
+    .linkedin-btn {
+  background: #0a66c2;
+}
+
+.linkedin-btn:hover {
+  background: #084d96;
+}
+
+.whatsapp-btn {
+  background: #25d366;
+}
+
+.whatsapp-btn:hover {
+  background: #1ebe5d;
+}
 /* Título más pequeño para que no compita con el resto */
 .patient-section h2 {
   color: #2b6cb0;
@@ -705,6 +720,15 @@ header .intro p {
       h1 { font-size: 1.8em; }
       .events-grid { grid-template-columns: 1fr; }
     }
+
+  
+
+@media (max-width: 900px) {
+  .about-container {
+    grid-template-columns: 1fr;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -737,7 +761,7 @@ header .intro p {
 
   <!-- Subtítulo de la semana (solo una vez) -->
   <p class="subtitle">
-  Week of <strong>December 08 – 14, 2025</strong> · 
+  Week of <strong>December 15 – 21, 2025</strong> · 
   <span class="small-note">Times shown in Lima, Perú (GMT-5)</span>
 </p>
 
@@ -745,7 +769,7 @@ header .intro p {
   <!-- Intro completa: bloque amarillo + explicación + Instagram -->
   <div class="intro">
 <div class="weekly-update featured-gold">
-  <h3>📊 Weekly Update (Dec 08 – 14)</h3>
+  <h3>📊 Weekly Update (Dec 15 – 21)</h3>
   <p>
     During the last 7 days the platform registered:
     <br>• <strong>810 active users</strong>
@@ -758,39 +782,93 @@ header .intro p {
     <strong>Thank you</strong> for visiting, sharing and helping this project grow.
   </p>
 </div>
+<p style="margin-top:18px;">
+  <strong>Who we are & What is Critical Care Webinars</strong><br>
+  <strong>Critical Care Webinars (CCW)</strong> is an independent, open educational initiative
+  designed to organize, centralize, and share high-quality webinars and academic events
+  in <em>critical care, ECMO, clinical simulation, patient safety, and artificial intelligence in healthcare</em>,
+  as well as related fields such as <em>cardiology, nephrology, emergency medicine</em>,
+  and other areas of modern clinical medicine.
+</p>
 
+<p>
+  <strong>Behind CCW is me, Jhan Saldaña</strong>, a critical care physician and medical educator
+  with a strong interest in open medical education and global knowledge sharing.
+  This project was born from a simple but recurring need:
+  <em>valuable educational content was scattered across multiple platforms and often missed</em>.
+</p>
 
-    <p style="margin-top:18px;">
-      <strong>What is Critical Care Webinars?</strong><br>
-      Academic, living, and curated agenda of <em>webinars, courses, and events</em> in critical care, ECMO,
-      clinical simulation, patient safety, and AI in healthcare. It consolidates learning opportunities in one place 
-      and presents them with time-zone conversion to Lima (GMT-5).
-    </p>
+<p>
+  CCW functions as an <strong>academic, living, and curated agenda</strong> that consolidates
+  learning opportunities from institutions and scientific societies worldwide into a single platform,
+  with <strong>automatic time-zone conversion to Lima, Peru (GMT-5)</strong>.
+</p>
 
-    <p>
-      <strong>Last week we recorded more than 100 events</strong> and we continuously update the agenda by
-      incorporating new, verified sessions with standardized information (title, organizing institution,
-      thematic area, and access link).
-    </p>
+<p>
+  <strong>In the past week alone, more than 100 events were published</strong>, and the agenda is
+  continuously updated with new, verified sessions using standardized information
+  to ensure clarity, reliability, and easy access.
+</p>
+<div class="social" style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
 
-    <div class="social" style="margin-top:12px; font-weight:600;">
-      <a href="https://www.instagram.com/ccw_critalcarewebinars?igsh=dWNiNzc4MWVnZjE5"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="insta-btn">
-        <svg class="insta-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 
-          0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 
-          3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 
-          1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 
-          5-5-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3s-1.346 3-3 
-          3-3-1.346-3-3 1.346-3 3-3zm4.5-2a1.5 1.5 0 110 3 
-          1.5 1.5 0 010-3z"/>
-        </svg>
-        Follow us on Instagram
-      </a>
-    </div>
-  </div>
+  <!-- Instagram -->
+  <a href="https://www.instagram.com/ccw_critalcarewebinars?igsh=dWNiNzc4MWVnZjE5"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="insta-btn">
+    <svg class="insta-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M7 2C4.243 2 2 4.243 2 7v10c0 2.757 2.243 5 5 5h10c2.757 
+      0 5-2.243 5-5V7c0-2.757-2.243-5-5-5H7zm10 2c1.654 0 
+      3 1.346 3 3v10c0 1.654-1.346 3-3 3H7c-1.654 0-3-1.346-3-3V7c0-1.654 
+      1.346-3 3-3h10zm-5 3c-2.757 0-5 2.243-5 5s2.243 5 5 5 5-2.243 
+      5-5-2.243-5-5-5zm0 2c1.654 0 3 1.346 3 3s-1.346 3-3 
+      3-3-1.346-3-3 1.346-3 3-3zm4.5-2a1.5 1.5 0 110 3 
+      1.5 1.5 0 010-3z"/>
+    </svg>
+    Instagram
+  </a>
+
+  <!-- LinkedIn -->
+  <a href="https://www.linkedin.com/in/jhan-carlos-salda%C3%B1a-073248178"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="insta-btn linkedin-btn">
+    <svg class="insta-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 
+      3.5 1.12 1 2.5 1 4.98 2.12 4.98 3.5zM0 8h5v16H0V8zm7.5 
+      0H12v2.2h.1c.6-1.1 2.1-2.2 4.4-2.2 4.7 0 5.6 3.1 
+      5.6 7.1V24h-5v-7.8c0-1.9 0-4.3-2.6-4.3-2.6 
+      0-3 2-3 4.1V24h-5V8z"/>
+    </svg>
+    LinkedIn
+  </a>
+
+  <!-- WhatsApp -->
+  <a href="https://chat.whatsapp.com/EoX5VRcvvAVIYwllDUgN9p"
+     target="_blank"
+     rel="noopener noreferrer"
+     class="insta-btn whatsapp-btn">
+    <svg class="insta-icon" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M20.52 3.48A11.9 11.9 0 0012 0C5.37 
+      0 0 5.37 0 12c0 2.1.55 4.15 
+      1.6 5.97L0 24l6.3-1.65A11.93 
+      11.93 0 0012 24c6.63 0 12-5.37 
+      12-12 0-3.2-1.25-6.21-3.48-8.52zM12 
+      22a9.94 9.94 0 01-5.1-1.4l-.36-.22-3.74.98 
+      1-3.65-.24-.38A9.96 9.96 0 1122 
+      12c0 5.52-4.48 10-10 10zm5.43-7.55c-.3-.15-1.77-.87-2.05-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 
+      1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.8-1.49-1.79-1.66-2.09-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.6-.92-2.2-.24-.58-.48-.5-.67-.5-.17 
+      0-.37-.02-.57-.02-.2 0-.52.07-.8.37-.27.3-1.05 
+      1.02-1.05 2.5 0 1.47 1.07 2.9 1.22 
+      3.1.15.2 2.1 3.2 5.08 4.49.71.31 
+      1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.08 
+      1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/>
+    </svg>
+    WhatsApp
+  </a>
+
+</div>
+
 </header>
 
     <div id="loadingSection" class="loading">
@@ -1391,6 +1469,7 @@ header .intro p {
         </p>
       </div>
 
+
       <div class="resources-section" style="border-top: 4px solid #3182ce; background:linear-gradient(135deg,#f7fafc 0%,#edf2f7 100%); margin-top:40px;">
         <h2>💜 Support the Project</h2>
         <p style="font-size:1em; color:#2d3748; line-height:1.6;">
@@ -1418,43 +1497,39 @@ header .intro p {
     <script>
 const BASE_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=46389417&single=true&output=csv';
 
-const GID_SHEET_7 = '746785163';     // Week Dec 1–7 (previous)
-const GID_SHEET_8 = '46389417';      // Week Dec 8–14 (current)
-
 const WEEKS = [
-  {
-    key: 'current',
-    label: 'Week Dec 8 – 14, 2025',
-    gid: GID_SHEET_8,
-    start: '2025-12-08',
-    end: '2025-12-14',
-    dayNames: {
-      '2025-12-08': 'Monday, Dec 8',
-      '2025-12-09': 'Tuesday, Dec 9',
-      '2025-12-10': 'Wednesday, Dec 10',
-      '2025-12-11': 'Thursday, Dec 11',
-      '2025-12-12': 'Friday, Dec 12',
-      '2025-12-13': 'Saturday, Dec 13',
-      '2025-12-14': 'Sunday, Dec 14'
-    }
-  },
-
-  {
-    key: 'prev',
-    label: 'Week Dec 1 – 7, 2025',
-    gid: GID_SHEET_7,
-    start: '2025-12-01',
-    end: '2025-12-07',
-    dayNames: {
-      '2025-12-01': 'Monday, Dec 1',
-      '2025-12-02': 'Tuesday, Dec 2',
-      '2025-12-03': 'Wednesday, Dec 3',
-      '2025-12-04': 'Thursday, Dec 4',
-      '2025-12-05': 'Friday, Dec 5',
-      '2025-12-06': 'Saturday, Dec 6',
-      '2025-12-07': 'Sunday, Dec 7'
-    }
+{
+  key: 'current',
+  label: 'Week Dec 15 – 21, 2025',
+  start: '2025-12-15',
+  end: '2025-12-21',
+  dayNames: {
+    '2025-12-15': 'Monday, Dec 15',
+    '2025-12-16': 'Tuesday, Dec 16',
+    '2025-12-17': 'Wednesday, Dec 17',
+    '2025-12-18': 'Thursday, Dec 18',
+    '2025-12-19': 'Friday, Dec 19',
+    '2025-12-20': 'Saturday, Dec 20',
+    '2025-12-21': 'Sunday, Dec 21'
   }
+},
+
+ {
+  key: 'prev',
+  label: 'Week Dec 8 – 14, 2025',
+  
+  start: '2025-12-08',
+  end:   '2025-12-14',
+  dayNames: {
+    '2025-12-08': 'Monday, Dec 8',
+    '2025-12-09': 'Tuesday, Dec 9',
+    '2025-12-10': 'Wednesday, Dec 10',
+    '2025-12-11': 'Thursday, Dec 11',
+    '2025-12-12': 'Friday, Dec 12',
+    '2025-12-13': 'Saturday, Dec 13',
+    '2025-12-14': 'Sunday, Dec 14'
+  }
+},
 ];
 
 
@@ -1477,6 +1552,10 @@ const WEEKS = [
         }
         return "";
       }
+      function toISODate(d) {
+  const x = new Date(d + 'T00:00:00');
+  return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;
+}
 
       function normalizeTime(x) {
         if (x === null || x === undefined) return "";
@@ -1531,8 +1610,13 @@ const WEEKS = [
         return rows;
       }
 
-      function withinRange(d, s, e) { return d >= s && d <= e; }
-
+      function withinRange(d, s, e) {
+  if (!d || !s || !e) return false;
+  const D = new Date(d + 'T00:00:00');
+  const S = new Date(s + 'T00:00:00');
+  const E = new Date(e + 'T23:59:59');
+  return D >= S && D <= E;
+}
       function todayStrLima() {
         const d = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' }));
         const Y = d.getFullYear();
@@ -1924,43 +2008,6 @@ const WEEKS = [
         URL.revokeObjectURL(url);
       }
 
-      async function loadWeek(week) {
-        const url = buildSheetUrl(week.gid);
-        console.log(`Loading ${week.label}...`);
-        
-        try {
-          const res = await fetch(url, { 
-            cache: "no-store",
-            headers: {
-              'Accept': 'text/csv,text/plain,*/*'
-            }
-          });
-          
-          if (!res.ok) {
-            throw new Error(`HTTP ${res.status}: ${res.statusText}`);
-          }
-          
-          const csv = await res.text();
-          
-          if (!csv || csv.trim().length === 0) {
-            throw new Error('Empty response received');
-          }
-          
-          console.log(`✓ Loaded ${week.label}: ${csv.substring(0, 50)}...`);
-          
-          const parsed = parseCSV(csv);
-          const filtered = parsed.filter(e => withinRange(e.date, week.start, week.end));
-          
-          console.log(`✓ Parsed ${filtered.length} events for ${week.label}`);
-          
-          return filtered.sort((a, b) => a.date.localeCompare(b.date) || a.time.localeCompare(b.time));
-          
-        } catch (err) {
-          console.error(`✗ Failed to load ${week.label}:`, err);
-          throw new Error(`Cannot load ${week.label}: ${err.message}`);
-        }
-      }
-
       function updateFutureCounter() {
         const nowLima = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' }));
         const count = events.reduce((acc, e) => {
@@ -1971,88 +2018,85 @@ const WEEKS = [
         }, 0);
         document.getElementById('futureEvents').textContent = String(count);
       }
+async function loadAll() {
+  const $loading = document.getElementById('loadingSection');
+  const $error = document.getElementById('errorSection');
+  const $main = document.getElementById('mainContent');
 
-      async function loadAll() {
-        const $loading = document.getElementById('loadingSection');
-        const $error = document.getElementById('errorSection');
-        const $main = document.getElementById('mainContent');
+  $loading.style.display = 'block';
+  $error.style.display = 'none';
+  $main.style.display = 'none';
 
-        $loading.style.display = 'block';
-        $error.style.display = 'none';
-        $main.style.display = 'none';
+  try {
+    const res = await fetch(BASE_SHEET_CSV, { cache: "no-store" });
+    if (!res.ok) throw new Error("Cannot load Google Sheet");
 
-        try {
-          if (typeof Papa === 'undefined') {
-            throw new Error('PapaParse library failed to load. Please refresh the page.');
-          }
+    const csv = await res.text();
+    const parsed = parseCSV(csv);
 
-          const [currentList, prevList] = await Promise.all([
-            loadWeek(WEEKS.find(w => w.key === 'current')),
-            loadWeek(WEEKS.find(w => w.key === 'prev'))
-          ]);
+    // Normalizar todas las fechas
+    parsed.forEach(e => {
+      e.date = normalizeDate(e.date);
+    });
 
-          events.length = 0;
-          allDates.clear();
-          currentList.forEach(e => {
-            events.push(e);
-            allDates.add(e.date);
-          });
+    const currentWeek = WEEKS.find(w => w.key === 'current');
+    const prevWeek = WEEKS.find(w => w.key === 'prev');
 
-          document.getElementById('totalEvents').textContent = String(events.length);
-          initLanguageFilter(events);
-          updateDateFilter(WEEKS.find(w => w.key === 'current').dayNames);
+    // Filtrar eventos de la semana actual
+    events = parsed.filter(e =>
+      withinRange(e.date, currentWeek.start, currentWeek.end)
+    );
 
-          const t = todayStrLima();
-          const toggleBtn = document.getElementById('toggleTodayBtn');
-          if (allDates.has(t)) {
-            showTodayOnly = true;
-            toggleBtn.classList.add('active');
-            toggleBtn.textContent = '↩️ Show all';
-          } else {
-            showTodayOnly = false;
-            toggleBtn.classList.remove('active');
-            toggleBtn.textContent = '🟣 Today only';
-          }
+    // Filtrar eventos de la semana anterior
+    const prevList = parsed.filter(e =>
+      withinRange(e.date, prevWeek.start, prevWeek.end)
+    );
 
-          updateFutureCounter();
-          filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
+    document.getElementById('totalEvents').textContent = events.length;
+    document.getElementById('visibleEvents').textContent = events.length;
+    document.getElementById('prevWeekEvents').textContent = prevList.length;
 
-          const prev = WEEKS.find(w => w.key === 'prev');
-          archive['prev'] = {
-            flat: prevList.slice(),
-            byDay: prevList.reduce((acc, ev) => {
-              (acc[ev.date] ||= []).push(ev);
-              return acc;
-            }, {})
-          };
+    allDates = new Set(events.map(e => e.date));
+    initLanguageFilter(events);
+    updateDateFilter(currentWeek.dayNames);
 
-          const hasArchive = archive['prev'].flat.length > 0;
-          document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : 'none';
-          if (hasArchive) {
-            const acc = document.getElementById('archiveAccordion');
-            acc.innerHTML = '';
-            renderArchive('prev');
-          }
+    // Preparar archivo
+    archive['prev'] = {
+      flat: prevList,
+      byDay: prevList.reduce((acc, ev) => {
+        (acc[ev.date] ||= []).push(ev);
+        return acc;
+      }, {})
+    };
 
-          $loading.style.display = 'none';
-          $main.style.display = 'block';
+    document.getElementById('archiveAccordion').innerHTML = '';
+    if (prevList.length > 0) {
+      renderArchive('prev');
+      document.getElementById('archiveBlock').style.display = 'block';
+    }
 
-        } catch (err) {
-          console.error(err);
-          $loading.style.display = 'none';
-          $error.style.display = 'block';
-          $error.innerHTML = `
-            <strong>⚠️ Error loading events</strong><br>
-            ${err.message}<br><br>
-            Please verify that:<br>
-            • Both sheets are <em>Published to the web</em> as CSV<br>
-            • PapaParse library loaded correctly<br>
-            • Your internet connection is stable<br><br>
-            <button class="btn-secondary" id="retryBtn">Retry</button>
-          `;
-          document.getElementById('retryBtn').onclick = loadAll;
-        }
-      }
+    updateFutureCounter();
+    filterEvents(currentWeek.dayNames);
+
+    $loading.style.display = 'none';
+    $main.style.display = 'block';
+
+  } catch (err) {
+    console.error(err);
+    $loading.style.display = 'none';
+    $error.style.display = 'block';
+    $error.innerHTML = `
+      <strong>⚠️ Error loading events</strong><br>
+      ${err.message}<br><br>
+      Please verify that:<br>
+      • The sheet is <em>Published to the web</em> as CSV<br>
+      • PapaParse library loaded correctly<br>
+      • Your internet connection is stable<br><br>
+      <button class="btn-secondary" id="retryBtn">Retry</button>
+    `;
+    document.getElementById('retryBtn').onclick = loadAll;
+  }
+}
 
       document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('reloadBtn').onclick = () => { loadAll(); };

@@ -772,39 +772,26 @@ header .intro p {
   </div>
 
   <!-- Subtítulo de la semana (solo una vez) -->
-<p class="subtitle">
-  <strong>Holiday period: December 22, 2025 – January 5, 2026</strong> · 
+  <p class="subtitle">
+  <strong>Week: January 5 – 11, 2026</strong> · 
   <span class="small-note">Times shown in Lima, Perú (GMT-5)</span>
 </p>
 
-<div class="holiday-banner">
-  <img 
-    src="CCW.png"
-    alt="Season’s Greetings from Critical Care Webinars"
-  >
-</div>
-
   <!-- Intro completa: bloque amarillo + explicación + Instagram -->
   <div class="intro">
-<div class="weekly-update featured-gold">
-  <h3>🌍 CCW Milestone & Holiday Update</h3>
+<div class="weekly-update">
+  <h3>🌍 CCW Milestone Update</h3>
   <p>
     Since its creation, <strong>Critical Care Webinars</strong> has reached professionals in
-    <strong>115+ countries</strong>, accumulated nearly <strong>5,000 visits</strong>,
-    and shared more than <strong>1,200 high-quality webinars</strong> worldwide.
-    <br><br>
+    <strong>115+ countries</strong>, accumulated over <strong>5,100 visits</strong>, and shared more than
+    <strong>1,200 high-quality webinars</strong> worldwide.
+  </p>
+  <p>
     This project remains committed to <strong>decentralized, open, and barrier-free medical education</strong>,
     helping clinicians discover valuable learning opportunities that might otherwise go unnoticed.
-    <br><br>
-    🎄 During the holiday period (Dec 22 – Jan 5), events will continue to be added as they are found,
-    but the platform will not undergo structural updates.
-    <br><br>
-    ✨ We wish you a peaceful Christmas and a healthy, fulfilling New Year.
-    CCW will resume regular updates during the <strong>second week of January</strong>.
-    <br><br>
-    Thank you for being part of this growing global community.
   </p>
 </div>
+
 
 <p style="margin-top:18px;">
   <strong>Who we are & What is Critical Care Webinars</strong><br>
@@ -828,11 +815,6 @@ header .intro p {
   with <strong>automatic time-zone conversion to Lima, Peru (GMT-5)</strong>.
 </p>
 
-<p>
-  <strong>In the past week alone, more than 100 events were published</strong>, and the agenda is
-  continuously updated with new, verified sessions using standardized information
-  to ensure clarity, reliability, and easy access.
-</p>
 <div class="social" style="margin-top:14px; display:flex; gap:12px; flex-wrap:wrap; align-items:center;">
 
   <!-- Instagram -->
@@ -1524,25 +1506,17 @@ const BASE_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3C
 const WEEKS = [
 {
   key: 'current',
-  label: 'Holiday period · Dec 22, 2025 – Jan 5, 2026',
-  start: '2025-12-22',
-  end: '2026-01-05',
+  label: 'Week January 5 – 11, 2026',
+  start: '2026-01-05',
+  end: '2026-01-11',
   dayNames: {
-    '2025-12-22': 'Monday, Dec 22',
-    '2025-12-23': 'Tuesday, Dec 23',
-    '2025-12-24': 'Wednesday, Dec 24',
-    '2025-12-25': 'Thursday, Dec 25',
-    '2025-12-26': 'Friday, Dec 26',
-    '2025-12-27': 'Saturday, Dec 27',
-    '2025-12-28': 'Sunday, Dec 28',
-    '2025-12-29': 'Monday, Dec 29',
-    '2025-12-30': 'Tuesday, Dec 30',
-    '2025-12-31': 'Wednesday, Dec 31',
-    '2026-01-01': 'Thursday, Jan 1',
-    '2026-01-02': 'Friday, Jan 2',
-    '2026-01-03': 'Saturday, Jan 3',
-    '2026-01-04': 'Sunday, Jan 4',
-    '2026-01-05': 'Monday, Jan 5'
+    '2026-01-05': 'Monday, Jan 5',
+    '2026-01-06': 'Tuesday, Jan 6',
+    '2026-01-07': 'Wednesday, Jan 7',
+    '2026-01-08': 'Thursday, Jan 8',
+    '2026-01-09': 'Friday, Jan 9',
+    '2026-01-10': 'Saturday, Jan 10',
+    '2026-01-11': 'Sunday, Jan 11'
   }
 },
 
@@ -1560,9 +1534,31 @@ const WEEKS = [
     '2025-12-20': 'Saturday, Dec 20',
     '2025-12-21': 'Sunday, Dec 21'
   }
+},
+  {
+  key: 'holiday',
+  label: 'Week Dec 22, 2025 – Jan 4, 2026',
+  start: '2025-12-22',
+  end:   '2026-01-04',
+  dayNames: {
+    '2025-12-22': 'Monday, Dec 22',
+    '2025-12-23': 'Tuesday, Dec 23',
+    '2025-12-24': 'Wednesday, Dec 24',
+    '2025-12-25': 'Thursday, Dec 25',
+    '2025-12-26': 'Friday, Dec 26',
+    '2025-12-27': 'Saturday, Dec 27',
+    '2025-12-28': 'Sunday, Dec 28',
+    '2025-12-29': 'Monday, Dec 29',
+    '2025-12-30': 'Tuesday, Dec 30',
+    '2025-12-31': 'Wednesday, Dec 31',
+    '2026-01-01': 'Thursday, Jan 1',
+    '2026-01-02': 'Friday, Jan 2',
+    '2026-01-03': 'Saturday, Jan 3',
+    '2026-01-04': 'Sunday, Jan 4'
+  }
 }
 ];
-
+      const IS_FIRST_WEEK_OF_YEAR = true;
 
       const buildSheetUrl = (gid) => BASE_SHEET_CSV.replace(/gid=\d+/, `gid=${gid}`);
 
@@ -1878,7 +1874,11 @@ const WEEKS = [
 
         const total = data.flat.length;
         if (weekKey === 'prev') {
-          document.getElementById('prevWeekEvents').textContent = String(total || 120);
+          if (IS_FIRST_WEEK_OF_YEAR) {
+  document.getElementById('prevWeekEvents').textContent = '–';
+} else {
+  document.getElementById('prevWeekEvents').textContent = prevList.length;
+}
         }
 
         const header = document.createElement('button');
@@ -2072,6 +2072,7 @@ async function loadAll() {
 
     const currentWeek = WEEKS.find(w => w.key === 'current');
     const prevWeek = WEEKS.find(w => w.key === 'prev');
+    const holidayWeek = WEEKS.find(w => w.key === 'holiday');
 
     // Filtrar eventos de la semana actual
     events = parsed.filter(e =>
@@ -2082,6 +2083,9 @@ async function loadAll() {
     const prevList = parsed.filter(e =>
       withinRange(e.date, prevWeek.start, prevWeek.end)
     );
+    const holidayList = parsed.filter(e =>
+  withinRange(e.date, holidayWeek.start, holidayWeek.end)
+);
 
     document.getElementById('totalEvents').textContent = events.length;
     document.getElementById('visibleEvents').textContent = events.length;
@@ -2099,12 +2103,29 @@ async function loadAll() {
         return acc;
       }, {})
     };
+    archive['holiday'] = {
+  flat: holidayList,
+  byDay: holidayList.reduce((acc, ev) => {
+    (acc[ev.date] ||= []).push(ev);
+    return acc;
+  }, {})
+};
 
-    document.getElementById('archiveAccordion').innerHTML = '';
-    if (prevList.length > 0) {
-      renderArchive('prev');
-      document.getElementById('archiveBlock').style.display = 'block';
-    }
+   document.getElementById('archiveAccordion').innerHTML = '';
+
+let hasArchive = false;
+
+if (prevList.length > 0) {
+  renderArchive('prev');
+  hasArchive = true;
+}
+
+if (holidayList.length > 0) {
+  renderArchive('holiday');
+  hasArchive = true;
+}
+
+document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : 'none';
 
     updateFutureCounter();
     filterEvents(currentWeek.dayNames);

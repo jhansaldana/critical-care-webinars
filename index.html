@@ -87,18 +87,6 @@ header .intro p {
   color: #2b6cb0;
 }
 
-    .holiday-banner {
-  max-width: 1100px;
-  margin: 24px auto 36px;
-  border-radius: 18px;
-  overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0,0,0,0.15);
-}
-
-.holiday-banner img {
-  width: 100%;
-  display: block;
-}
 /* En móvil que no se rompa */
 @media (max-width: 768px) {
   .header-top {
@@ -588,6 +576,18 @@ header .intro p {
       margin-left: 0;
     }
 
+    .badge-ongoing{
+  background:#ecfdf5;
+  border-color:#bbf7d0;
+  color:#166534;
+  font-weight:800;
+}
+
+.event-card.ongoing{
+  border-left-color:#22c55e;
+  box-shadow: 0 10px 24px rgba(34,197,94,0.18);
+}
+
     .weekly-update {
       margin-top: 14px;
       padding: 16px;
@@ -773,7 +773,7 @@ header .intro p {
 
   <!-- Subtítulo de la semana (solo una vez) -->
   <p class="subtitle">
-  <strong>Week: January 5 – 11, 2026</strong> · 
+  <strong>Week: January 12 – 18, 2026</strong> · 
   <span class="small-note">Times shown in Lima, Perú (GMT-5)</span>
 </p>
 
@@ -1504,61 +1504,40 @@ header .intro p {
 const BASE_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=46389417&single=true&output=csv';
 
 const WEEKS = [
-{
-  key: 'current',
-  label: 'Week January 5 – 11, 2026',
-  start: '2026-01-05',
-  end: '2026-01-11',
-  dayNames: {
-    '2026-01-05': 'Monday, Jan 5',
-    '2026-01-06': 'Tuesday, Jan 6',
-    '2026-01-07': 'Wednesday, Jan 7',
-    '2026-01-08': 'Thursday, Jan 8',
-    '2026-01-09': 'Friday, Jan 9',
-    '2026-01-10': 'Saturday, Jan 10',
-    '2026-01-11': 'Sunday, Jan 11'
-  }
-},
-
-{
-  key: 'prev',
-  label: 'Week Dec 15 – 21, 2025',
-  start: '2025-12-15',
-  end:   '2025-12-21',
-  dayNames: {
-    '2025-12-15': 'Monday, Dec 15',
-    '2025-12-16': 'Tuesday, Dec 16',
-    '2025-12-17': 'Wednesday, Dec 17',
-    '2025-12-18': 'Thursday, Dec 18',
-    '2025-12-19': 'Friday, Dec 19',
-    '2025-12-20': 'Saturday, Dec 20',
-    '2025-12-21': 'Sunday, Dec 21'
-  }
-},
   {
-  key: 'holiday',
-  label: 'Week Dec 22, 2025 – Jan 4, 2026',
-  start: '2025-12-22',
-  end:   '2026-01-04',
-  dayNames: {
-    '2025-12-22': 'Monday, Dec 22',
-    '2025-12-23': 'Tuesday, Dec 23',
-    '2025-12-24': 'Wednesday, Dec 24',
-    '2025-12-25': 'Thursday, Dec 25',
-    '2025-12-26': 'Friday, Dec 26',
-    '2025-12-27': 'Saturday, Dec 27',
-    '2025-12-28': 'Sunday, Dec 28',
-    '2025-12-29': 'Monday, Dec 29',
-    '2025-12-30': 'Tuesday, Dec 30',
-    '2025-12-31': 'Wednesday, Dec 31',
-    '2026-01-01': 'Thursday, Jan 1',
-    '2026-01-02': 'Friday, Jan 2',
-    '2026-01-03': 'Saturday, Jan 3',
-    '2026-01-04': 'Sunday, Jan 4'
+    key: 'current',
+    label: 'Week January 12 – 18, 2026',
+    start: '2026-01-12',
+    end:   '2026-01-18',
+    dayNames: {
+      '2026-01-12': 'Monday, Jan 12',
+      '2026-01-13': 'Tuesday, Jan 13',
+      '2026-01-14': 'Wednesday, Jan 14',
+      '2026-01-15': 'Thursday, Jan 15',
+      '2026-01-16': 'Friday, Jan 16',
+      '2026-01-17': 'Saturday, Jan 17',
+      '2026-01-18': 'Sunday, Jan 18'
+    }
+  },
+  {
+    key: 'prev',
+    label: 'Week January 5 – 11, 2026',
+    start: '2026-01-05',
+    end:   '2026-01-11',
+    dayNames: {
+      '2026-01-05': 'Monday, Jan 5',
+      '2026-01-06': 'Tuesday, Jan 6',
+      '2026-01-07': 'Wednesday, Jan 7',
+      '2026-01-08': 'Thursday, Jan 8',
+      '2026-01-09': 'Friday, Jan 9',
+      '2026-01-10': 'Saturday, Jan 10',
+      '2026-01-11': 'Sunday, Jan 11'
+    }
   }
-}
 ];
-      const IS_FIRST_WEEK_OF_YEAR = true;
+
+const IS_FIRST_WEEK_OF_YEAR = false;
+
 
       const buildSheetUrl = (gid) => BASE_SHEET_CSV.replace(/gid=\d+/, `gid=${gid}`);
 
@@ -1629,9 +1608,10 @@ const WEEKS = [
           const category = getField(row, ["category", "categoría", "categoria", "especialidad"]);
           const language = getField(row, ["language", "idioma", "lang"]);
           const certificate = getField(row, ["certificate", "certificado", "cert"]);
+          const duration = getField(row, ["duration", "duracion", "duración", "mins", "minutes"]);
 
           if (date && time && title) {
-            rows.push({ date, time, title, link, organizer, category, language, certificate });
+            rows.push({ date, time, title, link, organizer, category, language, certificate, duration });
           }
         }
         return rows;
@@ -1659,6 +1639,32 @@ const WEEKS = [
           minutes: d.getMinutes()
         };
       }
+      function parseDurationMinutes(x) {
+  if (!x) return null;
+  const s = String(x).trim().toLowerCase();
+
+  // soporta: "60", "60 min", "90 mins", "75 min", "45 minutes"
+  const m = s.match(/(\d+)\s*(min|mins|minute|minutes)?/);
+  if (!m) return null;
+
+  const n = parseInt(m[1], 10);
+  return Number.isFinite(n) && n > 0 ? n : null;
+}
+
+// Crea Date real usando offset fijo -05:00 (Perú no usa DST)
+function dateTimeLima(dateStr, timeStr) {
+  const t = (timeStr || "00:00").trim();
+  const hhmm = /^\d{2}:\d{2}$/.test(t) ? t : normalizeTime(t) || "00:00";
+  return new Date(`${dateStr}T${hhmm}:00-05:00`);
+}
+
+function isOngoingEvent(ev) {
+  const now = new Date(); // real
+  const start = dateTimeLima(ev.date, ev.time);
+  const mins = parseDurationMinutes(ev.duration) ?? 60; // default 60 si falta
+  const end = new Date(start.getTime() + mins * 60000);
+  return now >= start && now < end;
+}
 
       function updateDateFilter(dayNames) {
         const select = document.getElementById('dayFilter');
@@ -1823,14 +1829,19 @@ const WEEKS = [
             })();
 
             if (isCertified) card.classList.add('certified');
+            const ongoing = isOngoingEvent(event);
+if (ongoing) card.classList.add('ongoing');
+
 
             card.innerHTML = `
               <div class="category-tag">${event.category || 'General'}</div>
               <div class="event-time">🕐 ${event.time}</div>
               <div class="event-title">
-                ${event.title}
-                ${isCertified ? '<span class="badge badge-cert">Certified</span>' : ''}
-              </div>
+  ${event.title}
+  ${ongoing ? '<span class="badge badge-ongoing">🟢 ONGOING</span>' : ''}
+  ${isCertified ? '<span class="badge badge-cert">Certified</span>' : ''}
+</div>
+
               <div class="event-organizer">📍 ${event.organizer || '—'}</div>
               <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin: 6px 0 10px 0;">
                 ${event.language ? `<span class="badge badge-lang">${event.language}</span>` : ''}
@@ -1873,13 +1884,9 @@ const WEEKS = [
         if (!data || !week) return;
 
         const total = data.flat.length;
-        if (weekKey === 'prev') {
-          if (IS_FIRST_WEEK_OF_YEAR) {
-  document.getElementById('prevWeekEvents').textContent = '–';
-} else {
-  document.getElementById('prevWeekEvents').textContent = prevList.length;
+       if (weekKey === 'prev') {
+  document.getElementById('prevWeekEvents').textContent = String(data.flat.length);
 }
-        }
 
         const header = document.createElement('button');
         header.className = 'accordion-header';
@@ -1922,6 +1929,9 @@ const WEEKS = [
             })();
 
             if (isCertified) card.classList.add('certified');
+            const ongoing = isOngoingEvent(ev);
+if (ongoing) card.classList.add('ongoing');
+
 
             card.innerHTML = `
               <div class="category-tag">${ev.category || 'General'}</div>
@@ -2072,7 +2082,6 @@ async function loadAll() {
 
     const currentWeek = WEEKS.find(w => w.key === 'current');
     const prevWeek = WEEKS.find(w => w.key === 'prev');
-    const holidayWeek = WEEKS.find(w => w.key === 'holiday');
 
     // Filtrar eventos de la semana actual
     events = parsed.filter(e =>
@@ -2083,9 +2092,7 @@ async function loadAll() {
     const prevList = parsed.filter(e =>
       withinRange(e.date, prevWeek.start, prevWeek.end)
     );
-    const holidayList = parsed.filter(e =>
-  withinRange(e.date, holidayWeek.start, holidayWeek.end)
-);
+
 
     document.getElementById('totalEvents').textContent = events.length;
     document.getElementById('visibleEvents').textContent = events.length;
@@ -2103,13 +2110,6 @@ async function loadAll() {
         return acc;
       }, {})
     };
-    archive['holiday'] = {
-  flat: holidayList,
-  byDay: holidayList.reduce((acc, ev) => {
-    (acc[ev.date] ||= []).push(ev);
-    return acc;
-  }, {})
-};
 
    document.getElementById('archiveAccordion').innerHTML = '';
 
@@ -2117,11 +2117,6 @@ let hasArchive = false;
 
 if (prevList.length > 0) {
   renderArchive('prev');
-  hasArchive = true;
-}
-
-if (holidayList.length > 0) {
-  renderArchive('holiday');
   hasArchive = true;
 }
 

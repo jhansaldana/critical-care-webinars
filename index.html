@@ -795,7 +795,7 @@ html{
   <!-- Subtítulo de la semana (solo una vez) -->
   
   <p class="subtitle">
-<strong>Week: January 26 – February 1, 2026</strong>
+    <strong>Week: February 2 – February 8, 2026</strong>
   <span class="small-note">Times shown in Lima, Perú (GMT-5)</span>
 </p>
 
@@ -804,8 +804,8 @@ html{
 <div class="weekly-update">
   <p>
     During the <strong>last 7 days</strong>, <strong>Critical Care Webinars</strong> has reached
-    <strong>500 active users</strong> and logged <strong>3,600 events</strong>,
-    with <strong>181 returning users</strong>.
+<strong>453 active users</strong> and logged <strong>3,800 K</strong>,
+with <strong>200 returning users</strong>.
   </p>
 
   <p>
@@ -896,6 +896,7 @@ html{
   <p style="margin-bottom:14px; color:#4a5568; font-size:0.95em;">
   If this page has been useful to you, remember that you can
   <a href="#support-ccw" class="support-anchor">support the project</a>
+  </a>
   and help Critical Care Webinars continue growing.
 </p>
   <a href="#support-ccw"
@@ -1552,10 +1553,24 @@ html{
 
     <script>
 const BASE_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=46389417&single=true&output=csv';
-
 const WEEKS = [
   {
     key: 'current',
+    label: 'Week February 2 – February 8, 2026',
+    start: '2026-02-02',
+    end:   '2026-02-08',
+    dayNames: {
+      '2026-02-02': 'Monday, Feb 2',
+      '2026-02-03': 'Tuesday, Feb 3',
+      '2026-02-04': 'Wednesday, Feb 4',
+      '2026-02-05': 'Thursday, Feb 5',
+      '2026-02-06': 'Friday, Feb 6',
+      '2026-02-07': 'Saturday, Feb 7',
+      '2026-02-08': 'Sunday, Feb 8'
+    }
+  },
+  {
+    key: 'prev',
     label: 'Week January 26 – February 1, 2026',
     start: '2026-01-26',
     end:   '2026-02-01',
@@ -1568,24 +1583,8 @@ const WEEKS = [
       '2026-01-31': 'Saturday, Jan 31',
       '2026-02-01': 'Sunday, Feb 1'
     }
-  },
-  {
-    key: 'prev',
-    label: 'Week January 19 – 25, 2026',
-    start: '2026-01-19',
-    end:   '2026-01-25',
-    dayNames: {
-      '2026-01-19': 'Monday, Jan 19',
-      '2026-01-20': 'Tuesday, Jan 20',
-      '2026-01-21': 'Wednesday, Jan 21',
-      '2026-01-22': 'Thursday, Jan 22',
-      '2026-01-23': 'Friday, Jan 23',
-      '2026-01-24': 'Saturday, Jan 24',
-      '2026-01-25': 'Sunday, Jan 25'
-    }
   }
 ];
-
 
 const IS_FIRST_WEEK_OF_YEAR = false;
 
@@ -2064,37 +2063,31 @@ if (ongoing) card.classList.add('ongoing');
         renderEvents(out, dayNames);
       }
 
-    function toICS(list) {
-  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Critical Care Webinars//EN"];
-
-  const now = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
-  const icsUTC = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z$/, "Z");
-
-  for (const ev of list) {
-    const start = dateTimeLima(ev.date, ev.time);
-
-    // usa duración si la tienes; si no, 60 min
-    const mins = parseDurationMinutes(ev.duration) ?? 60;
-    const end = new Date(start.getTime() + mins * 60000);
-
-    const safe = (s) => String(s || "").replace(/[\r\n]/g, " ").replace(/,/g, " ");
-
-    const uid = `${ev.date.replace(/-/g,'')}-${(ev.time||'00:00').replace(':','')}-${safe(ev.title).slice(0,20).replace(/\s+/g,'_')}@ccw`;
-
-    lines.push("BEGIN:VEVENT");
-    lines.push(`UID:${uid}`);
-    lines.push(`DTSTAMP:${now}`);
-    lines.push(`DTSTART:${icsUTC(start)}`);
-    lines.push(`DTEND:${icsUTC(end)}`);
-    lines.push(`SUMMARY:${safe(ev.title || "Event")}`);
-    lines.push(`DESCRIPTION:${safe([ev.organizer, ev.category].filter(Boolean).join(" | "))}`);
-    if (ev.link) lines.push(`URL:${ev.link}`);
-    lines.push("END:VEVENT");
-  }
-
-  lines.push("END:VCALENDAR");
-  return lines.join("\r\n");
-}
+      function toICS(list) {
+        const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Critical Care Webinars//EN"];
+        const now = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z/, "Z");
+        
+        for (const ev of list) {
+          const [h, m] = (ev.time || "00:00").split(':').map(n => parseInt(n || "0", 10));
+          const [Y, Mo, D] = ev.date.split('-').map(n => parseInt(n, 10));
+          const start = new Date(Y, (Mo - 1), D, h, m, 0);
+          const end = new Date(start.getTime() + 60 * 60 * 1000);
+          const fmt = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z/, "Z");
+          
+          lines.push("BEGIN:VEVENT");
+          lines.push(`UID:${Y}${String(Mo).padStart(2, '0')}${String(D).padStart(2, '0')}-${String(h).padStart(2, '0')}${String(m).padStart(2, '0')}@ccw`);
+          lines.push(`DTSTAMP:${now}`);
+          lines.push(`DTSTART:${fmt(start)}`);
+          lines.push(`DTEND:${fmt(end)}`);
+          lines.push(`SUMMARY:${(ev.title || 'Event').replace(/[\r\n,]/g, ' ')}`);
+          lines.push(`DESCRIPTION:${[(ev.organizer || ''), (ev.category || '')].filter(Boolean).join(' | ').replace(/[\r\n,]/g, ' ')}`);
+          if (ev.link) lines.push(`URL:${ev.link}`);
+          lines.push("END:VEVENT");
+        }
+        
+        lines.push("END:VCALENDAR");
+        return lines.join("\r\n");
+      }
 
       function exportICS(list, filename) {
         const blob = new Blob([toICS(list)], { type: "text/calendar" });
@@ -2263,5 +2256,3 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
   </div>
 </body>
 </html>
-
-

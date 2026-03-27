@@ -27,7 +27,24 @@
       padding: 20px;
       color: #1a202c;
     }
+html, body {
+  overflow-x: hidden;
+}
 
+.container,
+header,
+.intro,
+.weekly-update,
+.filters,
+.stats,
+.archive,
+.resources-section,
+.site-footer,
+.event-card,
+.resource-card,
+.stat-item {
+  max-width: 100%;
+}
     .container { max-width: 1200px; margin: 0 auto; }
 
     header {
@@ -761,6 +778,68 @@ header .intro p {
 /* Smooth scroll for anchor links */
 html{
   scroll-behavior:smooth;
+}
+    @media (max-width: 768px) {
+  .events-grid,
+  .resource-grid,
+  .patient-grid,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card,
+  .resource-card,
+  .stat-item {
+    min-width: 0;
+    width: 100%;
+  }
+}
+    @media (max-width: 768px) {
+  .events-grid,
+  .resource-grid,
+  .stats {
+    grid-template-columns: 1fr;
+  }
+
+  .event-card,
+  .resource-card,
+  .stat-item {
+    min-width: 0;
+    width: 100%;
+  }
+}
+    @media (max-width: 768px) {
+  .header-top {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .header-top > div {
+    width: 100%;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
+    @media (max-width: 768px) {
+  .intro,
+  .weekly-update {
+    padding: 14px;
+  }
+
+  .resources-section,
+  .archive,
+  .site-footer,
+  header {
+    padding: 16px;
+  }
 }
 
   </style>

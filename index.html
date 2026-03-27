@@ -625,105 +625,7 @@ header .intro p {
       line-height: 1.6;
     }
 
-    /* Sección pacientes */
-   
-.patient-section {
-  border-top: 3px solid #2b6cb0;
-  background: linear-gradient(135deg,#f7fafc 0%,#edf2f7 100%);
-  padding: 20px; /* un poco menos que 30px */
-}
-    .paypal-btn {
-  background: #0070ba; /* PayPal blue */
-}
-
-.paypal-btn:hover {
-  background: #005ea6;
-}
-
-    .linkedin-btn {
-  background: #0a66c2;
-}
-
-.linkedin-btn:hover {
-  background: #084d96;
-}
-
-.whatsapp-btn {
-  background: #25d366;
-}
-
-.whatsapp-btn:hover {
-  background: #1ebe5d;
-}
-/* Título más pequeño para que no compita con el resto */
-.patient-section h2 {
-  color: #2b6cb0;
-  font-size: 1.3em;
-  margin-bottom: 10px;
-}
-
-/* Texto un poco más compacto */
-.patient-section p {
-  font-size: 0.9em;
-}
-
-.patient-card {
-  font-size: 0.9em;
-}
-.patient-card h4 {
-  font-size: 1em;
-}
-.patient-card p,
-.patient-card li {
-  font-size: 0.9em;
-}
-
-    .patient-section {
-      border-top: 4px solid #2b6cb0;
-      background: linear-gradient(135deg,#f7fafc 0%,#edf2f7 100%);
-    }
-
-    .patient-section h3 {
-      color: #2b6cb0;
-      margin-bottom: 12px;
-      font-size: 1.3em;
-    }
-
-    .patient-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      margin-top: 14px;
-    }
-
-    .patient-card {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 14px 16px;
-      border: 1px solid #e2e8f0;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-
-    .patient-card h4 {
-      color: #2b6cb0;
-      margin-bottom: 6px;
-      font-size: 1.05em;
-    }
-
-    .patient-card p {
-      font-size: 0.9em;
-      color: #2d3748;
-      line-height: 1.5;
-    }
-
-    .patient-card ul {
-      margin-top: 6px;
-      padding-left: 18px;
-      font-size: 0.9em;
-      color: #4a5568;
-    }
-
-    .patient-card li { margin-bottom: 4px; }
+    
     .insta-btn {
   display: inline-flex;
   align-items: center;
@@ -759,11 +661,6 @@ header .intro p {
 
   
 
-@media (max-width: 900px) {
-  .about-container {
-    grid-template-columns: 1fr;
-  }
-}
     /* Support the project anchor */
 .support-anchor{
   color:#2b6cb0;
@@ -779,21 +676,7 @@ header .intro p {
 html{
   scroll-behavior:smooth;
 }
-    @media (max-width: 768px) {
-  .events-grid,
-  .resource-grid,
-  .patient-grid,
-  .stats {
-    grid-template-columns: 1fr;
-  }
-
-  .event-card,
-  .resource-card,
-  .stat-item {
-    min-width: 0;
-    width: 100%;
-  }
-}
+  
     @media (max-width: 768px) {
   .events-grid,
   .resource-grid,
@@ -841,7 +724,56 @@ html{
     padding: 16px;
   }
 }
+.site-footer {
+  margin-top: 40px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.site-footer h3 {
+  color: #1e3a5f;
+  margin-bottom: 6px;
+  font-size: 1.15em;
+}
+
+.site-footer p {
+  color: #64748b;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #1d4ed8;
+  font-weight: 600;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-note {
+  border-top: 1px solid #e2e8f0;
+  padding-top: 14px;
+  font-size: 0.92em;
+}
   </style>
 </head>
 <body>
@@ -1640,6 +1572,26 @@ html{
 </div>
     </div>
 
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div>
+      <h3>CCW Academy</h3>
+      <p>Curated global critical care education.</p>
+    </div>
+
+    <div class="footer-links">
+      <a href="#eventsContainer">Webinars</a>
+      <a href="#resources-section-main">Resources</a>
+      <a href="#support-ccw">Support</a>
+    </div>
+  </div>
+
+  <p class="footer-note">
+    CCW Academy is an independent educational initiative created to organize and share high-quality academic opportunities in critical care and related fields.
+  </p>
+</footer>
+
     <script>
 const BASE_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=46389417&single=true&output=csv';
 function getLimaNow() {
@@ -1729,9 +1681,6 @@ function getDynamicWeeks() {
 }
 
 const WEEKS = getDynamicWeeks();
-const IS_FIRST_WEEK_OF_YEAR = false;
-
-      const buildSheetUrl = (gid) => BASE_SHEET_CSV.replace(/gid=\d+/, `gid=${gid}`);
 
       let events = [];
       let allDates = new Set();

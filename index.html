@@ -1730,17 +1730,27 @@ const WEEKS = getDynamicWeeks();
       let showTodayOnly = true;
 
       function normalizeDate(x) {
-        if (!x) return "";
-        const s = String(x).trim();
-        if (/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
-        const m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})$/);
-        if (m) {
-          let [, d, mo, y] = m;
-          if (y.length === 2) y = (Number(y) > 50 ? "19" : "20") + y;
-          return `${y.padStart(4, "0")}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}`;
-        }
-        return "";
-      }
+  if (!x) return "";
+
+  const s = String(x).trim();
+
+  // YYYY-MM-DD
+  let m = s.match(/^(\d{4})-(\d{2})-(\d{2})(?:\s+\d{1,2}:\d{2}(?::\d{2})?)?$/);
+  if (m) {
+    const [, y, mo, d] = m;
+    return `${y}-${mo}-${d}`;
+  }
+
+  // DD/MM/YYYY, DD-MM-YYYY, optionally with HH:MM or HH:MM:SS
+  m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{2,4})(?:\s+\d{1,2}:\d{2}(?::\d{2})?)?$/);
+  if (m) {
+    let [, d, mo, y] = m;
+    if (y.length === 2) y = (Number(y) > 50 ? "19" : "20") + y;
+    return `${y.padStart(4, "0")}-${mo.padStart(2, "0")}-${d.padStart(2, "0")}`;
+  }
+
+  return "";
+}
       function toISODate(d) {
   const x = new Date(d + 'T00:00:00');
   return `${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`;
@@ -1748,7 +1758,7 @@ const WEEKS = getDynamicWeeks();
   function normalizeTime(x) {
   if (x === null || x === undefined || x === "") return "";
 
-  // Caso 1: viene como número decimal de Google Sheets (ej. 0.520833 = 12:30)
+  // Google Sheets time decimal: 0.520833 = 12:30
   if (typeof x === "number" && x >= 0 && x < 1) {
     const totalMinutes = Math.round(x * 24 * 60);
     const h = Math.floor(totalMinutes / 60);
@@ -1758,31 +1768,52 @@ const WEEKS = getDynamicWeeks();
 
   let s = String(x).trim().toLowerCase();
   s = s.replace(/\s+/g, " ");
-  s = s.replace(/\s*[ap]\.?m\.?$/, "");
 
-  // Caso 2: formato HH:MM
+  // If value includes date + time, keep only the time part.
+  // Supports: 13/05/2026 18:15:00, 2026-05-13 18:15:00
+  const dateTimeMatch = s.match(/\b(\d{1,2}:\d{2})(?::\d{2})?\b/);
+  if (dateTimeMatch) {
+    s = dateTimeMatch[1];
+  }
+
+  const isPM = /\b(p\.?m\.?|pm)\b/.test(s);
+  const isAM = /\b(a\.?m\.?|am)\b/.test(s);
+
+  s = s.replace(/\s*(a\.?m\.?|p\.?m\.?|am|pm)\s*$/, "");
+
+  // HH:MM
   if (/^\d{1,2}:\d{1,2}$/.test(s)) {
     let [h, m] = s.split(":").map(v => parseInt(v, 10));
     if (isNaN(h) || isNaN(m)) return "";
     if (h < 0 || h > 23 || m < 0 || m > 59) return "";
+
+    if (isPM && h < 12) h += 12;
+    if (isAM && h === 12) h = 0;
+
     return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
   }
 
-  // Caso 3: solo hora entera
+  // Hour only
   if (/^\d{1,2}$/.test(s)) {
-    const h = parseInt(s, 10);
+    let h = parseInt(s, 10);
     if (h < 0 || h > 23) return "";
+
+    if (isPM && h < 12) h += 12;
+    if (isAM && h === 12) h = 0;
+
     return `${String(h).padStart(2, "0")}:00`;
   }
 
-  // Caso 4: decimal tipo 7.5 = 07:30
+  // Decimal hour: 7.5 = 07:30
   const f = parseFloat(s.replace(",", "."));
   if (!isNaN(f) && f >= 0 && f <= 24) {
     const h = Math.floor(f);
     const m = Math.round((f - h) * 60);
+
     if (m === 60) {
       return `${String(h + 1).padStart(2, "0")}:00`;
     }
+
     return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
   }
 
@@ -1809,9 +1840,10 @@ function getField(row, keys) {
 
         const rows = [];
         for (const row of result.data) {
-          const date = normalizeDate(getField(row, ["date", "fecha", "día", "dia"]));
-          const rawTime = row["time"] ?? row["hora"] ?? row["start"] ?? row["inicio"] ?? "";
-          const time = normalizeTime(rawTime);
+         const rawDate = getField(row, ["date", "fecha", "día", "dia", "d+t", "dt"]);
+         const rawTime = getField(row, ["time", "hora", "start", "inicio", "d+t", "dt"]);
+         const date = normalizeDate(rawDate);
+         const time = normalizeTime(rawTime || rawDate);
           const title = getField(row, ["title", "título", "titulo", "tema", "subject"]);
           const link = getField(row, ["link", "enlace", "url"]);
           const organizer = getField(row, ["organizer", "organizador", "host", "org", "institucion", "institución"]);

@@ -2179,31 +2179,106 @@ if (ongoing) card.classList.add('ongoing');
         renderEvents(out, dayNames);
       }
 
-      function toICS(list) {
-        const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Critical Care Webinars//EN"];
-        const now = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z/, "Z");
-        
-        for (const ev of list) {
-          const [h, m] = (ev.time || "00:00").split(':').map(n => parseInt(n || "0", 10));
-          const [Y, Mo, D] = ev.date.split('-').map(n => parseInt(n, 10));
-          const start = new Date(Y, (Mo - 1), D, h, m, 0);
-          const end = new Date(start.getTime() + 60 * 60 * 1000);
-          const fmt = d => new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().replace(/[-:]/g, "").replace(/\.\d{3}Z/, "Z");
-          
-          lines.push("BEGIN:VEVENT");
-          lines.push(`UID:${Y}${String(Mo).padStart(2, '0')}${String(D).padStart(2, '0')}-${String(h).padStart(2, '0')}${String(m).padStart(2, '0')}@ccw`);
-          lines.push(`DTSTAMP:${now}`);
-          lines.push(`DTSTART:${fmt(start)}`);
-          lines.push(`DTEND:${fmt(end)}`);
-          lines.push(`SUMMARY:${(ev.title || 'Event').replace(/[\r\n,]/g, ' ')}`);
-          lines.push(`DESCRIPTION:${[(ev.organizer || ''), (ev.category || '')].filter(Boolean).join(' | ').replace(/[\r\n,]/g, ' ')}`);
-          if (ev.link) lines.push(`URL:${ev.link}`);
-          lines.push("END:VEVENT");
-        }
-        
-        lines.push("END:VCALENDAR");
-        return lines.join("\r\n");
-      }
+    function toICS(list) {
+  const TZID = "America/Lima";
+
+  function escapeICS(text) {
+    return String(text || "")
+      .replace(/\\/g, "\\\\")
+      .replace(/\n/g, "\\n")
+      .replace(/\r/g, "")
+      .replace(/,/g, "\\,")
+      .replace(/;/g, "\\;");
+  }
+
+  function foldLine(line) {
+    const max = 75;
+    let out = "";
+    while (line.length > max) {
+      out += line.slice(0, max) + "\r\n ";
+      line = line.slice(max);
+    }
+    return out + line;
+  }
+
+  function fmtUTC(date) {
+    return date.toISOString()
+      .replace(/[-:]/g, "")
+      .replace(/\.\d{3}Z$/, "Z");
+  }
+
+  function fmtLimaWallTime(date) {
+    // Lima is fixed UTC-5 and does not use daylight saving time.
+    const lima = new Date(date.getTime() - 5 * 60 * 60 * 1000);
+    const y = lima.getUTCFullYear();
+    const mo = String(lima.getUTCMonth() + 1).padStart(2, "0");
+    const d = String(lima.getUTCDate()).padStart(2, "0");
+    const h = String(lima.getUTCHours()).padStart(2, "0");
+    const m = String(lima.getUTCMinutes()).padStart(2, "0");
+    const s = String(lima.getUTCSeconds()).padStart(2, "0");
+    return `${y}${mo}${d}T${h}${m}${s}`;
+  }
+
+  function limaDateTime(dateStr, timeStr) {
+    const hhmm = normalizeTime(timeStr) || "00:00";
+    return new Date(`${dateStr}T${hhmm}:00-05:00`);
+  }
+
+  const lines = [
+    "BEGIN:VCALENDAR",
+    "VERSION:2.0",
+    "PRODID:-//Critical Care Webinars//EN",
+    "CALSCALE:GREGORIAN",
+    "METHOD:PUBLISH",
+    "BEGIN:VTIMEZONE",
+    `TZID:${TZID}`,
+    `X-LIC-LOCATION:${TZID}`,
+    "BEGIN:STANDARD",
+    "TZOFFSETFROM:-0500",
+    "TZOFFSETTO:-0500",
+    "TZNAME:PET",
+    "DTSTART:19700101T000000",
+    "END:STANDARD",
+    "END:VTIMEZONE"
+  ];
+
+  const now = fmtUTC(new Date());
+
+  for (const ev of list) {
+    const start = limaDateTime(ev.date, ev.time);
+    const mins = parseDurationMinutes(ev.duration) ?? 60;
+    const end = new Date(start.getTime() + mins * 60000);
+
+    const uidTitle = String(ev.title || "event")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+      .slice(0, 40);
+
+    const uid = `${ev.date}-${ev.time}-${uidTitle}@criticalcarewebinars`;
+
+    const description = [
+      ev.organizer ? `Organizer: ${ev.organizer}` : "",
+      ev.category ? `Category: ${ev.category}` : "",
+      ev.language ? `Language: ${ev.language}` : "",
+      ev.link ? `Link: ${ev.link}` : ""
+    ].filter(Boolean).join("\\n");
+
+    lines.push("BEGIN:VEVENT");
+    lines.push(`UID:${escapeICS(uid)}`);
+    lines.push(`DTSTAMP:${now}`);
+    lines.push(`DTSTART;TZID=${TZID}:${fmtLimaWallTime(start)}`);
+    lines.push(`DTEND;TZID=${TZID}:${fmtLimaWallTime(end)}`);
+    lines.push(`SUMMARY:${escapeICS(ev.title || "Critical Care Webinar")}`);
+    lines.push(`DESCRIPTION:${escapeICS(description)}`);
+    if (ev.link) lines.push(`URL:${ev.link}`);
+    lines.push("END:VEVENT");
+  }
+
+  lines.push("END:VCALENDAR");
+
+  return lines.map(foldLine).join("\r\n");
+}
 
       function exportICS(list, filename) {
         const blob = new Blob([toICS(list)], { type: "text/calendar" });

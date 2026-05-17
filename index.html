@@ -818,15 +818,17 @@ html{
   </p>
 
   <p>
-    During the last 7 days, CCW reached <strong>756 active users</strong> and recorded
-    <strong>6k events</strong>, with <strong>340 returning users</strong>.
-  </p>
+   <p>
+  During the last 7 days, CCW reached
+  <strong id="gaActiveUsers">loading...</strong> active users and recorded
+  <strong id="gaEventCount">loading...</strong> events, with
+  <strong id="gaReturningUsers">loading...</strong> returning users.
+</p>
 
-  <p>
-    Top countries by active users:
-    <strong>Peru (264)</strong>, <strong>Mexico (96)</strong>,
-    <strong>Ecuador (52)</strong>, <strong>Argentina (48)</strong>.
-  </p>
+<p>
+  Top countries by active users:
+  <strong id="gaTopCountries">loading...</strong>.
+</p>
 
   <p>
     This project remains committed to <strong>decentralized, open, and barrier-free medical education</strong>,
@@ -1591,6 +1593,7 @@ html{
 </footer>
 
     <script>
+const GA_STATS_CSV = '[https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=1107242821&single=true&output=csv](https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=1107242821&single=true&output=csv) ';
 const BASE_SHEET_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSgscb3CQReXXkS1S7Sgj_e-COWBuQ38YO-eJ9Cr3wOvV8MCPGFt-s-01KLNkCpi00zqFnMvMsL4zTi/pub?gid=46389417&single=true&output=csv';
 function getLimaNow() {
   return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Lima' }));
@@ -2300,6 +2303,49 @@ if (ongoing) card.classList.add('ongoing');
         }, 0);
         document.getElementById('futureEvents').textContent = String(count);
       }
+      async function loadGAStats() {
+  try {
+    const res = await fetch(GA_STATS_CSV, { cache: 'no-store' });
+    if (!res.ok) throw new Error('Cannot load GA4 stats');
+
+    const csv = await res.text();
+
+    const result = Papa.parse(csv, {
+      header: true,
+      skipEmptyLines: 'greedy'
+    });
+
+    const stats = {};
+
+    result.data.forEach(row => {
+      if (row.key) {
+        stats[row.key] = row.value;
+      }
+    });
+
+    document.getElementById('gaActiveUsers').textContent =
+      Number(stats.activeUsers || 0).toLocaleString('en-US');
+
+    document.getElementById('gaEventCount').textContent =
+      formatCompactNumber(stats.eventCount || 0);
+
+    document.getElementById('gaReturningUsers').textContent =
+      Number(stats.returningUsers || 0).toLocaleString('en-US');
+
+    document.getElementById('gaTopCountries').textContent =
+      stats.topCountries || 'data unavailable';
+
+  } catch (err) {
+    console.warn('GA4 stats unavailable:', err);
+  }
+}
+
+function formatCompactNumber(value) {
+  return new Intl.NumberFormat('en-US', {
+    notation: 'compact',
+    maximumFractionDigits: 1
+  }).format(Number(value || 0));
+}
 async function loadAll() {
   const $loading = document.getElementById('loadingSection');
   const $error = document.getElementById('errorSection');
@@ -2390,6 +2436,7 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
 
       document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('reloadBtn').onclick = () => { loadAll(); };
+         loadGAStats();
         document.getElementById('searchFilter').oninput = () => filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
         document.getElementById('dayFilter').onchange = () => {
           showTodayOnly = false;

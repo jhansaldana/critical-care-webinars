@@ -104,6 +104,18 @@ header .intro p {
   color: #2b6cb0;
 }
 
+.submit-event-link {
+  background: #2b6cb0;
+  color: #ffffff !important;
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+.submit-event-link:hover {
+  background: #1e4e8c;
+  text-decoration: none;
+}
+
 /* En móvil que no se rompa */
 @media (max-width: 768px) {
   .header-top {
@@ -167,6 +179,21 @@ header .intro p {
       flex-wrap: wrap;
       align-items: center;
     }
+    .checkbox-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #2b6cb0;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+}
+
+.checkbox-filter input {
+  width: 18px;
+  height: 18px;
+  accent-color: #2b6cb0;
+}
 
     .filter-actions {
       display:flex;
@@ -797,9 +824,17 @@ html{
 
     <nav>
       <ul class="nav-links">
-        <li><a href="#eventsContainer">Webinars</a></li>
-        <li><a href="#resources-section-main">Resources</a></li>
-      </ul>
+  <li><a href="#eventsContainer">Webinars</a></li>
+  <li><a href="#resources-section-main">Resources</a></li>
+  <li>
+    <a href="PEGA_AQUI_TU_LINK_DE_GOOGLE_FORM"
+       target="_blank"
+       rel="noopener noreferrer"
+       class="submit-event-link">
+      Submit an event
+    </a>
+  </li>
+</ul>
     </nav>
   </div>
 
@@ -971,10 +1006,16 @@ html{
         <span class="filter-label">Filter:</span>
         <select id="dayFilter"></select>
         <select id="langFilter" title="Language">
-          <option value="__ALL__">All languages</option>
-        </select>
-        <input type="text" id="searchFilter" placeholder="Search by topic, organizer, or specialty…">
-        <button id="reloadBtn" class="btn-secondary">🔄 Refresh</button>
+  <option value="__ALL__">All languages</option>
+</select>
+
+<label class="checkbox-filter">
+  <input type="checkbox" id="certifiedOnlyFilter">
+  Certified only
+</label>
+
+<input type="text" id="searchFilter" placeholder="Search by topic, organizer, or specialty…">
+<button id="reloadBtn" class="btn-secondary">🔄 Refresh</button>
       </div>
 
       <div id="eventsContainer"></div>
@@ -2156,6 +2197,7 @@ if (ongoing) card.classList.add('ongoing');
         const search = (document.getElementById('searchFilter').value || '').toLowerCase();
         const langSel = document.getElementById('langFilter');
         const langVal = (langSel && langSel.value) ? langSel.value : '__ALL__';
+        const certifiedOnly = document.getElementById('certifiedOnlyFilter')?.checked || false;
 
         let selectedDay = select.value;
 
@@ -2176,7 +2218,11 @@ if (ongoing) card.classList.add('ongoing');
           const okSearch = !search || hay.includes(search);
           const evLang = (ev.language || '').trim();
           const okLang = (langVal === '__ALL__') || evLang === langVal;
-          return okDay && okSearch && okLang;
+          const rawCert = (ev.certificate || '').toString().trim().toLowerCase();
+          const isCertified = ['yes', 'y', 'true', '1', 'certified', 'sí', 'si'].includes(rawCert) ||
+          (rawCert && rawCert !== 'no' && rawCert !== 'false' && rawCert !== '0');
+          const okCertified = !certifiedOnly || isCertified;
+          return okDay && okSearch && okLang && okCertified;
         });
 
         renderEvents(out, dayNames);
@@ -2438,6 +2484,7 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
         document.getElementById('reloadBtn').onclick = () => { loadAll(); };
          loadGAStats();
         document.getElementById('searchFilter').oninput = () => filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
+        document.getElementById('certifiedOnlyFilter').onchange = () => filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
         document.getElementById('dayFilter').onchange = () => {
           showTodayOnly = false;
           const btn = document.getElementById('toggleTodayBtn');

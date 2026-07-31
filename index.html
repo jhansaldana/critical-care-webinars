@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Critical Care Webinars</title>
+  <title>CCW Academy — Critical Care Webinars</title>
   <meta name="description" content="CCW Academy centraliza webinars y eventos académicos gratuitos de cuidados críticos, ECMO, simulación clínica y medicina de urgencias, con horarios convertidos automáticamente a Lima, Perú (GMT-5)." />
   <link rel="canonical" href="https://ccwacademy.org/" />
   <link rel="icon" type="image/jpeg" href="./IMG_5085.jpg" />
@@ -11,7 +11,7 @@
   <!-- Open Graph / social sharing -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="CCW Academy" />
-  <meta property="og:title" content="Critical Care Webinars — Agenda global de educación médica" />
+  <meta property="og:title" content="CCW Academy — Critical Care Webinars" />
   <meta property="og:description" content="Agenda curada de webinars y cursos gratuitos en cuidados críticos, ECMO, simulación clínica y más, con horarios en Lima, Perú (GMT-5)." />
   <meta property="og:image" content="https://ccwacademy.org/CCW%20PORTADA.png" />
   <meta property="og:url" content="https://ccwacademy.org/" />
@@ -644,6 +644,55 @@ header .intro p {
   box-shadow: 0 10px 24px rgba(34,197,94,0.18);
 }
 
+.badge-today{
+  background:#eff6ff;
+  border-color:#bfdbfe;
+  color:#1d4ed8;
+  font-weight:800;
+}
+
+.badge-tomorrow{
+  background:#fef3c7;
+  border-color:#fde68a;
+  color:#92400e;
+  font-weight:700;
+}
+
+.badge-live-soon{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#c2410c;
+  font-weight:800;
+}
+
+.intro-short{
+  margin-top:14px;
+}
+
+.intro-short p{
+  color:#2d3748;
+  font-size:1.08em;
+  line-height:1.6;
+  margin-bottom:10px;
+}
+
+.intro-short .learn-more-link{
+  display:inline-block;
+  background:#ffffff;
+  color:#2b6cb0;
+  border:2px solid #2b6cb0;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:700;
+  text-decoration:none;
+  transition:all .2s;
+}
+
+.intro-short .learn-more-link:hover{
+  background:#2b6cb0;
+  color:#ffffff;
+}
+
     .weekly-update {
       margin-top: 14px;
       padding: 16px;
@@ -831,12 +880,13 @@ html{
         src="./IMG_5085.jpg"
         alt="CCW Logo"
         style="height:55px; border-radius:8px; object-fit:contain;">
-      <h1>📅 Critical Care Webinars</h1>
+      <h1>📅 CCW Academy — Critical Care Webinars</h1>
     </div>
 
     <nav>
       <ul class="nav-links">
   <li><a href="#eventsContainer">Webinars</a></li>
+  <li><a href="#courses-content">Courses</a></li>
   <li><a href="#resources-section-main">Resources</a></li>
   <li>
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSdizJIkDVITCFaOwHpWj-Z21Y1W_OTLI3s7r-e69eiobcmNlA/viewform?usp=sf_link"
@@ -846,6 +896,8 @@ html{
   Submit an event
 </a>
   </li>
+  <li><a href="#about-ccw">About</a></li>
+  <li><a href="#support-ccw">Support</a></li>
 </ul>
     </nav>
   </div>
@@ -853,9 +905,78 @@ html{
   <!-- Subtítulo de la semana -->
   <p class="subtitle">
     <strong id="weekLabel">Week loading...</strong>
-    <span class="small-note">Times shown in Lima, Perú (GMT-5)</span>
+    <span class="small-note" id="timezoneNote">Times shown in Lima, Perú (GMT-5)</span>
   </p>
 
+  <!-- Intro corta -->
+  <div class="intro-short">
+    <p>Discover curated critical care webinars and educational events from around the world, shown in your local time.</p>
+    <a href="#about-ccw" class="learn-more-link">Learn more about CCW →</a>
+  </div>
+</header>
+
+    <div id="loadingSection" class="loading">
+      <div class="loading-spinner"></div>
+      <p>Loading events…</p>
+    </div>
+
+    <div id="errorSection" class="error" style="display:none;"></div>
+
+    <div id="mainContent" style="display:none;">
+      <div class="filter-actions">
+        <button id="toggleTodayBtn" class="toggle-today">🟣 Today only</button>
+        <button id="toggleLocalTimeBtn" class="toggle-today" type="button">🌍 See in my local time</button>
+      </div>
+
+      <div class="filters">
+        <span class="filter-label">Filter:</span>
+        <select id="dayFilter"></select>
+        <select id="langFilter" title="Language">
+  <option value="__ALL__">All languages</option>
+</select>
+
+<label class="checkbox-filter">
+  <input type="checkbox" id="certifiedOnlyFilter">
+  Certified only
+</label>
+
+<input type="text" id="searchFilter" placeholder="Search by topic, organizer, or specialty…">
+<button id="reloadBtn" class="btn-secondary">🔄 Refresh</button>
+      </div>
+
+      <div id="eventsContainer"></div>
+
+      <div class="archive" id="archiveBlock" style="display:none;">
+        <h2 style="color:#2b6cb0; margin-bottom:8px;">🗂️ Weeks archive</h2>
+        <div class="accordion" id="archiveAccordion"></div>
+      </div>
+
+      <h2 style="color:#2b6cb0; margin: 30px 0 8px 0;">📊 CCW at a glance</h2>
+      <div class="stats">
+        <div class="stat-item">
+          <div class="stat-number" id="totalEvents">0</div>
+          <div class="stat-label">Total events (current week)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="visibleEvents">0</div>
+          <div class="stat-label">Visible events</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="futureEvents">0</div>
+          <div class="stat-label">Upcoming events (current week)</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" id="prevWeekEvents">0</div>
+          <div class="stat-label">Events last week</div>
+        </div>
+        <div class="stat-item">
+          <button id="exportWeek" class="btn-secondary">📥 Export current week (.ics)</button>
+          <div class="small-note" style="margin-top:6px">Import into Google/Outlook</div>
+        </div>
+      </div>
+
+<div class="resources-section" id="about-ccw">
+  <h2>ℹ️ About CCW Academy — Critical Care Webinars</h2>
   <!-- Intro completa -->
   <div class="intro">
    <div class="weekly-update">
@@ -978,65 +1099,8 @@ html{
 
 </div>
 
-</header>
-
-    <div id="loadingSection" class="loading">
-      <div class="loading-spinner"></div>
-      <p>Loading events…</p>
-    </div>
-
-    <div id="errorSection" class="error" style="display:none;"></div>
-
-    <div id="mainContent" style="display:none;">
-      <div class="stats">
-        <div class="stat-item">
-          <div class="stat-number" id="totalEvents">0</div>
-          <div class="stat-label">Total events (current week)</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" id="visibleEvents">0</div>
-          <div class="stat-label">Visible events</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" id="futureEvents">0</div>
-          <div class="stat-label">Upcoming events (current week)</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number" id="prevWeekEvents">0</div>
-          <div class="stat-label">Events last week</div>
-        </div>
-        <div class="stat-item">
-          <button id="exportWeek" class="btn-secondary">📥 Export current week (.ics)</button>
-          <div class="small-note" style="margin-top:6px">Import into Google/Outlook</div>
-        </div>
-      </div>
-
-      <div class="filter-actions">
-        <button id="toggleTodayBtn" class="toggle-today">🟣 Today only</button>
-      </div>
-
-      <div class="filters">
-        <span class="filter-label">Filter:</span>
-        <select id="dayFilter"></select>
-        <select id="langFilter" title="Language">
-  <option value="__ALL__">All languages</option>
-</select>
-
-<label class="checkbox-filter">
-  <input type="checkbox" id="certifiedOnlyFilter">
-  Certified only
-</label>
-
-<input type="text" id="searchFilter" placeholder="Search by topic, organizer, or specialty…">
-<button id="reloadBtn" class="btn-secondary">🔄 Refresh</button>
-      </div>
-
-      <div id="eventsContainer"></div>
-
-      <div class="archive" id="archiveBlock" style="display:none;">
-        <h2 style="color:#2b6cb0; margin-bottom:8px;">🗂️ Weeks archive</h2>
-        <div class="accordion" id="archiveAccordion"></div>
-      </div>
+  </div>
+</div>
 
 <div class="resources-section" id="resources-section-main">
         <h2>📚 Resources for Intensivists & Simulationists</h2>
@@ -1588,22 +1652,20 @@ html{
           </div>
         </div>
       </div>
-<div class="resources-section" style="border-top: 4px solid #3182ce; background:linear-gradient(135deg,#f7fafc 0%,#edf2f7 100%); margin-top:40px;">
-  <section id="support-ccw">
-    <h2>💜 Support the Project</h2>
+<div class="resources-section" id="support-ccw">
+  <h2>❤️ Support CCW Academy</h2>
 
-    <p style="font-size:1em; color:#2d3748; line-height:1.6;">
-      <strong>Critical Care Webinars</strong> is a collaborative, non-profit educational initiative that curates global webinars, courses, and podcasts in intensive care, simulation, and medical innovation.
-      We are committed to keeping this resource open, free, and continuously updated for the entire healthcare community.
-    </p>
+  <p style="font-size:1em; color:#2d3748; line-height:1.6;">
+    <strong>Critical Care Webinars</strong> is a collaborative, non-profit educational initiative that curates global webinars, courses, and podcasts in intensive care, simulation, and medical innovation.
+    We are committed to keeping this resource open, free, and continuously updated for the entire healthcare community.
+  </p>
 
-    <p style="margin-top:16px; color:#4a5568;">
-      If you wish to support our work and help maintain the platform, you can make a contribution through:
-    </p>
-
-    <div style="margin-top:20px; background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
-      <h4 style="color:#2b6cb0; margin-bottom:10px;">💰 Support options</h4>
-
+  <h3 class="resource-collapse-header collapsed" data-section="support">
+    <span>💰 Support options</span>
+    <span class="collapse-icon">▼</span>
+  </h3>
+  <div class="resource-collapsible-content" id="support-content" style="max-height:0;">
+    <div style="margin-top:10px; background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
       <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:14px;">
         <a href="https://www.paypal.me/CCWebinars"
            target="_blank"
@@ -1622,7 +1684,7 @@ html{
         Your support helps sustain and expand open-access medical education for clinicians worldwide 🌍
       </p>
     </div>
-  </section>
+  </div>
 </div>
     </div>
 
@@ -1630,13 +1692,15 @@ html{
 <footer class="site-footer">
   <div class="footer-inner">
     <div>
-      <h3>CCW Academy</h3>
+      <h3>CCW Academy — Critical Care Webinars</h3>
       <p>Curated global critical care education.</p>
     </div>
 
     <div class="footer-links">
       <a href="#eventsContainer">Webinars</a>
+      <a href="#courses-content">Courses</a>
       <a href="#resources-section-main">Resources</a>
+      <a href="#about-ccw">About</a>
       <a href="#support-ccw">Support</a>
     </div>
   </div>
@@ -1741,6 +1805,122 @@ const WEEKS = getDynamicWeeks();
       let allDates = new Set();
       let archive = {};
       let showTodayOnly = true;
+
+      let timeMode = localStorage.getItem('ccw_time_mode') || 'lima'; // 'lima' | 'local'
+      const VISITOR_TZ = (() => {
+        try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'your timezone'; }
+        catch (e) { return 'your timezone'; }
+      })();
+
+      function pad2(n) { return String(n).padStart(2, '0'); }
+
+      function todayStrLocal() {
+        const d = new Date();
+        return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}`;
+      }
+
+      function getTodayStrForMode() {
+        return timeMode === 'lima' ? todayStrLima() : todayStrLocal();
+      }
+
+      // Given an event (stored in Lima date/time), return the date/time to
+      // *display* under the current mode. In local mode we convert the
+      // real instant into the visitor's own timezone, so the day rolls
+      // forward or back automatically when it needs to.
+      function getDisplayInfo(ev) {
+        if (timeMode === 'lima') {
+          return { date: ev.date, time: ev.time };
+        }
+        const instant = dateTimeLima(ev.date, ev.time);
+        const y = instant.getFullYear();
+        const mo = pad2(instant.getMonth() + 1);
+        const d = pad2(instant.getDate());
+        const h = pad2(instant.getHours());
+        const mi = pad2(instant.getMinutes());
+        return { date: `${y}-${mo}-${d}`, time: `${h}:${mi}` };
+      }
+
+      function formatDayLabel(dateStr) {
+        const d = new Date(dateStr + 'T00:00:00');
+        return d.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+      }
+
+      function getRelativeDayBadge(dateStr, todayStr) {
+        if (dateStr === todayStr) return '<span class="badge badge-today">Today</span>';
+        const tmr = addDays(new Date(todayStr + 'T00:00:00'), 1);
+        if (dateStr === formatISO(tmr)) return '<span class="badge badge-tomorrow">Tomorrow</span>';
+        return '';
+      }
+
+      function isLiveSoon(ev) {
+        const now = new Date();
+        const start = dateTimeLima(ev.date, ev.time);
+        const diffMin = (start - now) / 60000;
+        return diffMin > 0 && diffMin <= 60;
+      }
+
+      function whatsappShareUrl(ev, dispDate, dispTime) {
+        const label = timeMode === 'lima' ? 'Lima time' : 'your local time';
+        const text = `${ev.title}\n${ev.organizer ? '📍 ' + ev.organizer + '\n' : ''}🕐 ${formatDayLabel(dispDate)}, ${dispTime} (${label})\n${ev.link || 'https://ccwacademy.org'}`;
+        return `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      }
+
+      function updateTimeModeUI() {
+        const btn = document.getElementById('toggleLocalTimeBtn');
+        const note = document.getElementById('timezoneNote');
+        if (!btn) return;
+        if (timeMode === 'local') {
+          btn.classList.add('active');
+          btn.textContent = '🇵🇪 Show Lima time';
+          if (note) note.textContent = `Times shown in your local time (${VISITOR_TZ})`;
+        } else {
+          btn.classList.remove('active');
+          btn.textContent = '🌍 See in my local time';
+          if (note) note.textContent = 'Times shown in Lima, Perú (GMT-5)';
+        }
+      }
+
+      function buildEventCardHTML(ev, todayStr, icsButtonHTML) {
+        const disp = getDisplayInfo(ev);
+
+        const isCertified = (() => {
+          const raw = (ev.certificate || '').toString().trim().toLowerCase();
+          if (!raw) return false;
+          return ['yes', 'y', 'true', '1', 'certified', 'sí', 'si'].includes(raw) || (raw !== 'no' && raw !== 'false' && raw !== '0');
+        })();
+
+        const ongoing = isOngoingEvent(ev);
+        const liveSoon = !ongoing && isLiveSoon(ev);
+        const dayBadge = getRelativeDayBadge(disp.date, todayStr);
+
+        const classes = ['event-card'];
+        if (isCertified) classes.push('certified');
+        if (ongoing) classes.push('ongoing');
+
+        const html = `
+              <div class="category-tag">${ev.category || 'General'}</div>
+              <div class="event-time">🕐 ${disp.time}</div>
+              <div class="event-title">
+  ${ev.title}
+  ${ongoing ? '<span class="badge badge-ongoing">🟢 ONGOING</span>' : ''}
+  ${liveSoon ? '<span class="badge badge-live-soon">🟠 Live soon</span>' : ''}
+  ${dayBadge}
+  ${isCertified ? '<span class="badge badge-cert">Certified</span>' : ''}
+</div>
+
+              <div class="event-organizer">📍 ${ev.organizer || '—'}</div>
+              <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin: 6px 0 10px 0;">
+                ${ev.language ? `<span class="badge badge-lang">${ev.language}</span>` : ''}
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                ${ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener noreferrer" class="event-link">Join →</a>` : ''}
+                ${icsButtonHTML}
+                <a href="${whatsappShareUrl(ev, disp.date, disp.time)}" target="_blank" rel="noopener noreferrer" class="event-link" style="background:#25d366;">📤 Share</a>
+              </div>
+            `;
+
+        return { html, classes };
+      }
 
       function normalizeDate(x) {
   if (!x) return "";
@@ -2007,7 +2187,7 @@ function isOngoingEvent(ev) {
       function renderEvents(filteredEvents, dayNames) {
         const container = document.getElementById('eventsContainer');
         container.innerHTML = '';
-        
+
         if (filteredEvents.length === 0) {
           container.innerHTML = '<div class="loading"><p>No events found</p></div>';
           document.getElementById('visibleEvents').textContent = '0';
@@ -2016,17 +2196,19 @@ function isOngoingEvent(ev) {
 
         const eventsByDay = {};
         filteredEvents.forEach(ev => {
-          (eventsByDay[ev.date] ||= []).push(ev);
+          const d = getDisplayInfo(ev).date;
+          (eventsByDay[d] ||= []).push(ev);
         });
 
-        const todayStr = todayStrLima();
+        const todayStr = getTodayStrForMode();
 
         Object.keys(eventsByDay).sort().forEach(date => {
+          const dayEvents = eventsByDay[date];
           const isPast = date < todayStr;
           const isToday = date === todayStr;
           const daySection = document.createElement('div');
           daySection.className = 'day-section';
-          const count = eventsByDay[date].length;
+          const count = dayEvents.length;
 
           const dayHeader = document.createElement('div');
           dayHeader.className = `day-header ${isPast ? 'past' : ''} ${isToday ? 'today' : ''}`;
@@ -2035,14 +2217,19 @@ function isOngoingEvent(ev) {
 
           dayHeader.innerHTML = `
             <div style="display:flex; align-items:center;">
-              <div class="day-title">${(dayNames[date] || date)} <span style="color:#718096; font-weight:600;">(${count})</span></div>
+              <div class="day-title">${(dayNames[date] || formatDayLabel(date))} <span style="color:#718096; font-weight:600;">(${count})</span></div>
               ${isToday ? '<span class="today-badge">📍 TODAY</span>' : ''}
             </div>
             <div style="display:flex; align-items:center; gap:15px;">
-              <button class="btn-secondary" data-day="${date}" onclick="event.stopPropagation()">📥 Export day (.ics)</button>
+              <button class="btn-secondary" data-day-export="1">📥 Export day (.ics)</button>
               <span class="collapse-icon">${shouldCollapse ? '▶' : '▼'}</span>
             </div>
           `;
+
+          dayHeader.querySelector('[data-day-export]').onclick = (e) => {
+            e.stopPropagation();
+            exportICS(dayEvents, `events-${date}.ics`);
+          };
 
           const dayContent = document.createElement('div');
           dayContent.className = `day-content ${shouldCollapse ? 'collapsed' : ''}`;
@@ -2073,40 +2260,12 @@ function isOngoingEvent(ev) {
           const eventsGrid = document.createElement('div');
           eventsGrid.className = 'events-grid';
 
-          eventsByDay[date].forEach(event => {
+          dayEvents.forEach(event => {
             const card = document.createElement('div');
-            card.className = 'event-card';
-
-            const isCertified = (() => {
-              const raw = (event.certificate || '').toString().trim().toLowerCase();
-              if (!raw) return false;
-              return ['yes', 'y', 'true', '1', 'certified', 'sí', 'si'].includes(raw) || (raw !== 'no' && raw !== 'false' && raw !== '0');
-            })();
-
-            if (isCertified) card.classList.add('certified');
-            const ongoing = isOngoingEvent(event);
-if (ongoing) card.classList.add('ongoing');
-
-
-            card.innerHTML = `
-              <div class="category-tag">${event.category || 'General'}</div>
-              <div class="event-time">🕐 ${event.time}</div>
-              <div class="event-title">
-  ${event.title}
-  ${ongoing ? '<span class="badge badge-ongoing">🟢 ONGOING</span>' : ''}
-  ${isCertified ? '<span class="badge badge-cert">Certified</span>' : ''}
-</div>
-
-              <div class="event-organizer">📍 ${event.organizer || '—'}</div>
-              <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin: 6px 0 10px 0;">
-                ${event.language ? `<span class="badge badge-lang">${event.language}</span>` : ''}
-              </div>
-              <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                ${event.link ? `<a href="${event.link}" target="_blank" rel="noopener noreferrer" class="event-link">Join →</a>` : ''}
-                <button class="ics-btn" data-ics="${event.date}__${event.time}__${(event.title || '').replace(/\s+/g, '_')}">.ics</button>
-              </div>
-            `;
-
+            const icsBtn = `<button class="ics-btn" data-ics="${event.date}__${event.time}__${(event.title || '').replace(/\s+/g, '_')}">.ics</button>`;
+            const { html, classes } = buildEventCardHTML(event, todayStr, icsBtn);
+            card.className = classes.join(' ');
+            card.innerHTML = html;
             eventsGrid.appendChild(card);
           });
 
@@ -2118,9 +2277,6 @@ if (ongoing) card.classList.add('ongoing');
 
         document.getElementById('visibleEvents').textContent = String(filteredEvents.length);
 
-        document.querySelectorAll('[data-day]').forEach(btn => {
-          btn.onclick = () => exportICS(filteredEvents.filter(e => e.date === btn.dataset.day), `events-${btn.dataset.day}.ics`);
-        });
         document.querySelectorAll('[data-ics]').forEach(btn => {
           btn.onclick = () => {
             const [d, t] = btn.dataset.ics.split('__');
@@ -2158,6 +2314,8 @@ if (ongoing) card.classList.add('ongoing');
         exportBtn.onclick = () => exportICS(data.flat, `events_${week.label.replace(/\s+/g, '_')}.ics`);
         content.appendChild(exportBtn);
 
+        const todayStr = getTodayStrForMode();
+
         Object.keys(data.byDay).sort().forEach(date => {
           const list = data.byDay[date];
           const wrap = document.createElement('div');
@@ -2175,35 +2333,10 @@ if (ongoing) card.classList.add('ongoing');
           grid.className = 'events-grid';
           list.forEach(ev => {
             const card = document.createElement('div');
-            card.className = 'event-card';
-
-            const isCertified = (() => {
-              const raw = (ev.certificate || '').toString().trim().toLowerCase();
-              if (!raw) return false;
-              return ['yes', 'y', 'true', '1', 'certified', 'sí', 'si'].includes(raw) || (raw !== 'no' && raw !== 'false' && raw !== '0');
-            })();
-
-            if (isCertified) card.classList.add('certified');
-            const ongoing = isOngoingEvent(ev);
-if (ongoing) card.classList.add('ongoing');
-
-
-            card.innerHTML = `
-              <div class="category-tag">${ev.category || 'General'}</div>
-              <div class="event-time">🕐 ${ev.time}</div>
-              <div class="event-title">
-                ${ev.title}
-                ${isCertified ? '<span class="badge badge-cert">Certified</span>' : ''}
-              </div>
-              <div class="event-organizer">📍 ${ev.organizer || '—'}</div>
-              <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin: 6px 0 10px 0;">
-                ${ev.language ? `<span class="badge badge-lang">${ev.language}</span>` : ''}
-              </div>
-              <div style="display:flex; gap:10px; flex-wrap:wrap;">
-                ${ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener noreferrer" class="event-link">Join →</a>` : ''}
-                <button class="ics-btn" data-archived-ics="${weekKey}__${ev.date}__${ev.time}">.ics</button>
-              </div>
-            `;
+            const icsBtn = `<button class="ics-btn" data-archived-ics="${weekKey}__${ev.date}__${ev.time}">.ics</button>`;
+            const { html, classes } = buildEventCardHTML(ev, todayStr, icsBtn);
+            card.className = classes.join(' ');
+            card.innerHTML = html;
             grid.appendChild(card);
           });
 
@@ -2245,20 +2378,16 @@ if (ongoing) card.classList.add('ongoing');
         const certifiedOnly = document.getElementById('certifiedOnlyFilter')?.checked || false;
 
         let selectedDay = select.value;
+        const todayStr = getTodayStrForMode();
 
         if (showTodayOnly) {
-          const t = todayStrLima();
-          if (allDates.has(t)) {
-            selectedDay = t;
-            select.value = t;
-          } else {
-            selectedDay = 'all';
-            select.value = 'all';
-          }
+          selectedDay = null; // handled via display-date comparison below
         }
 
         const out = events.filter(ev => {
-          const okDay = (selectedDay === 'all') || ev.date === selectedDay;
+          const okDay = showTodayOnly
+            ? (getDisplayInfo(ev).date === todayStr)
+            : ((selectedDay === 'all') || ev.date === selectedDay);
           const hay = [ev.title, ev.organizer, ev.category].filter(Boolean).join(' ').toLowerCase();
           const okSearch = !search || hay.includes(search);
           const evLang = (ev.language || '').trim();
@@ -2528,6 +2657,15 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
       document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('reloadBtn').onclick = () => { loadAll(); };
          loadGAStats();
+        updateTimeModeUI();
+        document.getElementById('toggleLocalTimeBtn').onclick = () => {
+          timeMode = (timeMode === 'lima') ? 'local' : 'lima';
+          localStorage.setItem('ccw_time_mode', timeMode);
+          updateTimeModeUI();
+          filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
+          document.getElementById('archiveAccordion').innerHTML = '';
+          if (archive['prev'] && archive['prev'].flat.length > 0) renderArchive('prev');
+        };
         document.getElementById('searchFilter').oninput = () => filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
         document.getElementById('certifiedOnlyFilter').onchange = () => filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
         document.getElementById('dayFilter').onchange = () => {

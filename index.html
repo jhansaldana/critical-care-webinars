@@ -1665,25 +1665,75 @@ html{
     <span class="collapse-icon">▼</span>
   </h3>
   <div class="resource-collapsible-content" id="support-content" style="max-height:0;">
-    <div style="margin-top:10px; background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
-      <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:14px;">
-        <a href="https://www.paypal.me/CCWebinars"
-           target="_blank"
-           rel="noopener noreferrer"
-           style="background:#0070ba; color:#fff; padding:10px 18px; border-radius:10px; text-decoration:none; font-weight:600;">
-          💙 Support via PayPal
-        </a>
+    <div style="margin-top:10px; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
+
+      <div style="background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
+        <h4 style="color:#2b6cb0; margin-bottom:14px;">🇵🇪 Perú</h4>
+
+        <div style="margin-bottom:16px;">
+          <div style="font-weight:700; color:#2d3748; margin-bottom:6px;">Yape</div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
+            <span style="font-family:monospace; font-size:1.05em; background:#f7fafc; padding:4px 10px; border-radius:6px;">921 911 149</span>
+            <button type="button" class="btn-secondary copy-btn" data-copy="921911149" style="padding:5px 12px; font-size:0.85em;">📋 Copy</button>
+          </div>
+          <img src="./yape-qr.png" alt="Yape QR code" style="width:140px; height:auto; border-radius:8px; border:1px solid #e2e8f0; display:none;" onerror="this.style.display='none'" onload="this.style.display='block'">
+        </div>
+
+        <div>
+          <div style="font-weight:700; color:#2d3748; margin-bottom:6px;">Plin</div>
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
+            <span style="font-family:monospace; font-size:1.05em; background:#f7fafc; padding:4px 10px; border-radius:6px;">921 911 149</span>
+            <button type="button" class="btn-secondary copy-btn" data-copy="921911149" style="padding:5px 12px; font-size:0.85em;">📋 Copy</button>
+          </div>
+        </div>
       </div>
 
-      <ul style="list-style:none; padding-left:0; line-height:1.8; color:#2d3748;">
-        <li><strong>BTC:</strong> <em>1Cy8uxDTQ6CWbxFxAQX88NTHh7EWZc2Z5A</em></li>
-        <li><strong>BNB:</strong> <em>3Lrosc3SFc5N9buFD4SHoHw98Tc11iYidQ</em></li>
-      </ul>
+      <div style="background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
+        <h4 style="color:#2b6cb0; margin-bottom:14px;">🌍 Internacional</h4>
 
-      <p style="color:#4a5568; font-size:0.9em; margin-top:10px;">
-        Your support helps sustain and expand open-access medical education for clinicians worldwide 🌍
-      </p>
+        <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px;">
+          <a href="https://www.paypal.me/CCWebinars"
+             target="_blank"
+             rel="noopener noreferrer"
+             style="background:#0070ba; color:#fff; padding:10px 18px; border-radius:10px; text-decoration:none; font-weight:600;">
+            💙 PayPal
+          </a>
+          <a href="https://ko-fi.com/ccw"
+             target="_blank"
+             rel="noopener noreferrer"
+             style="background:#ff5e5b; color:#fff; padding:10px 18px; border-radius:10px; text-decoration:none; font-weight:600;">
+            ☕ Ko-fi
+          </a>
+        </div>
+
+        <details style="margin-bottom:16px;">
+          <summary style="cursor:pointer; font-weight:700; color:#2b6cb0;">🏦 Bank transfer (USD / ACH)</summary>
+          <ul style="list-style:none; padding-left:0; line-height:1.9; color:#2d3748; margin-top:10px; font-size:0.92em;">
+            <li><strong>Account holder:</strong> Jiovany Jhan Carlos Saldaña Gastulo</li>
+            <li>
+              <strong>Account number:</strong> <span style="font-family:monospace;">8332231787</span>
+              <button type="button" class="copy-btn" data-copy="8332231787" style="border:none; background:none; color:#2b6cb0; cursor:pointer; font-size:0.85em;">📋</button>
+            </li>
+            <li><strong>Account type:</strong> Checking</li>
+            <li>
+              <strong>ACH routing number:</strong> <span style="font-family:monospace;">026073150</span>
+              <button type="button" class="copy-btn" data-copy="026073150" style="border:none; background:none; color:#2b6cb0; cursor:pointer; font-size:0.85em;">📋</button>
+            </li>
+            <li><strong>Bank:</strong> Community Federal Savings Bank</li>
+            <li><strong>Bank address:</strong> 5 Penn Plaza, 14th Floor, New York, NY 10001, US</li>
+          </ul>
+        </details>
+
+        <ul style="list-style:none; padding-left:0; line-height:1.8; color:#2d3748;">
+          <li><strong>BTC:</strong> <em>1Cy8uxDTQ6CWbxFxAQX88NTHh7EWZc2Z5A</em></li>
+          <li><strong>BNB:</strong> <em>3Lrosc3SFc5N9buFD4SHoHw98Tc11iYidQ</em></li>
+        </ul>
+      </div>
     </div>
+
+    <p style="color:#4a5568; font-size:0.9em; margin-top:14px;">
+      Your support helps sustain and expand open-access medical education for clinicians worldwide 🌍
+    </p>
   </div>
 </div>
     </div>
@@ -2714,6 +2764,37 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
               setTimeout(() => {
                 content.style.maxHeight = '0';
               }, 10);
+            }
+          });
+        });
+
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const text = btn.dataset.copy;
+            const original = btn.textContent;
+            const flash = (label) => {
+              btn.textContent = label;
+              setTimeout(() => { btn.textContent = original; }, 1500);
+            };
+            const legacyCopy = () => {
+              const ta = document.createElement('textarea');
+              ta.value = text;
+              ta.style.position = 'fixed';
+              ta.style.opacity = '0';
+              document.body.appendChild(ta);
+              ta.select();
+              let ok = false;
+              try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+              document.body.removeChild(ta);
+              return ok;
+            };
+            const isIcon = !original.trim().startsWith('📋 ');
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+              navigator.clipboard.writeText(text)
+                .then(() => flash(isIcon ? '✅' : '✅ Copied'))
+                .catch(() => flash(legacyCopy() ? (isIcon ? '✅' : '✅ Copied') : (isIcon ? '⚠️' : '⚠️ Copy failed')));
+            } else {
+              flash(legacyCopy() ? (isIcon ? '✅' : '✅ Copied') : (isIcon ? '⚠️' : '⚠️ Copy failed'));
             }
           });
         });

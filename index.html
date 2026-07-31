@@ -30,14 +30,27 @@
   </script>
 
   <style>
+    :root{
+      --bg:#10152b;
+      --panel:#141a33;
+      --panel-2:#1a2140;
+      --line:#2b3358;
+      --ink:#ece7d8;
+      --ink-dim:#a7a3c0;
+      --accent:#c9a15f;
+      --accent-soft:#8f7440;
+      --accent-ink:#14162a;
+      --cert:#7fae94;
+      --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ebf8ff 0%, #dbeafe 100%);
+      font-family: -apple-system,"Segoe UI",Tahoma,Geneva,Verdana,sans-serif;
+      background: radial-gradient(120% 140% at 15% -10%, #1a2247 0%, var(--bg) 55%) fixed;
       min-height: 100vh;
       padding: 20px;
-      color: #1a202c;
+      color: var(--ink);
     }
 html, body {
   overflow-x: hidden;
@@ -60,32 +73,35 @@ header,
     .container { max-width: 1200px; margin: 0 auto; }
 
     header {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
     }
 
     h1 {
-      color: #2b6cb0;
-      font-size: 2.5em;
-      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 1.6em;
+      font-weight: 800;
+      letter-spacing: -.01em;
+      margin-bottom: 4px;
     }
 
     .subtitle {
-      color: #4a5568;
-      font-size: 1.05em;
+      color: var(--ink-dim);
+      font-size: 0.95em;
     }
+    .subtitle strong{ color:var(--accent); font-family:var(--mono); font-weight:600; }
    .header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 20px;
   flex-wrap: wrap;
-  padding-bottom: 10px;
-  margin-bottom: 14px;
-  border-bottom: 3px solid #2b6cb0;  /* Línea azul estilo Irvin */
+  padding-bottom: 18px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--line);
 }
 /* Improve readability in header description */
 header .intro {
@@ -100,31 +116,34 @@ header .intro p {
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 18px;
+  gap: 20px;
   margin: 0;
   padding: 0;
-  font-size: 0.95em;
+  font-size: 0.78em;
+  align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #4a5568;
-  font-weight: 600;
+  color: var(--ink-dim);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
 }
 
 .nav-links a:hover {
-  color: #2b6cb0;
+  color: var(--ink);
 }
 
 .submit-event-link {
-  background: #2b6cb0;
-  color: #ffffff !important;
-  padding: 8px 12px;
-  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink) !important;
+  padding: 8px 14px;
+  border-radius: 5px;
 }
 
 .submit-event-link:hover {
-  background: #1e4e8c;
+  background: #d9b06f;
   text-decoration: none;
 }
 
@@ -138,27 +157,27 @@ header .intro p {
 
     .intro {
       margin-top: 14px;
-      color: #2d3748;
+      color: var(--ink-dim);
       line-height: 1.5;
       font-size: 0.98em;
-      background: #f7fafc;
-      border: 1px solid rgba(49,130,206,.25);
+      background: var(--panel-2);
+      border: 1px solid var(--line);
       padding: 12px 14px;
-      border-radius: 10px;
+      border-radius: 8px;
     }
 
     .loading {
-      background: #ffffff;
-      border-radius: 15px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
       padding: 40px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       margin-bottom: 30px;
     }
 
     .loading-spinner {
-      border: 4px solid #e2e8f0;
-      border-top: 4px solid #3182ce;
+      border: 4px solid var(--line);
+      border-top: 4px solid var(--accent);
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -172,20 +191,20 @@ header .intro p {
     }
 
     .error {
-      background: #fff5f5;
-      border: 2px solid #fc8181;
+      background: #2c1720;
+      border: 1px solid #6b3a4a;
       border-radius: 10px;
       padding: 20px;
       margin-bottom: 30px;
-      color: #c53030;
+      color: #f0a8b8;
     }
 
     .filters {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 24px;
       display: flex;
       gap: 15px;
       flex-wrap: wrap;
@@ -195,16 +214,19 @@ header .intro p {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #2b6cb0;
+  color: var(--ink-dim);
   font-weight: 700;
   cursor: pointer;
   user-select: none;
+  text-transform: uppercase;
+  font-size: .82em;
+  letter-spacing: .04em;
 }
 
 .checkbox-filter input {
   width: 18px;
   height: 18px;
-  accent-color: #2b6cb0;
+  accent-color: var(--accent);
 }
 
     .filter-actions {
@@ -212,86 +234,99 @@ header .intro p {
       gap:12px;
       align-items:center;
       margin-bottom: 10px;
+      flex-wrap: wrap;
     }
 
     .filter-label {
-      font-weight: bold;
-      color: #2b6cb0;
+      font-weight: 700;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      font-size: .82em;
+      letter-spacing: .04em;
     }
 
     select,
     input[type="text"] {
-      padding: 10px 15px;
-      border: 2px solid #3182ce;
-      border-radius: 8px;
-      font-size: 1em;
+      padding: 9px 13px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      font-size: .95em;
       outline: none;
-      transition: all 0.3s;
-      background: #ffffff;
-      color: #1a202c;
+      transition: all 0.2s;
+      background: var(--panel-2);
+      color: var(--ink);
     }
 
     select:focus,
     input[type="text"]:focus {
-      border-color: #2b6cb0;
-      box-shadow: 0 0 0 3px rgba(49,130,206,.15);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(201,161,95,.18);
     }
 
     .toggle-today {
-      background: #ffffff;
-      color: #2b6cb0;
-      border: 2px solid #2b6cb0;
+      background: var(--panel-2);
+      color: var(--ink-dim);
+      border: 1px solid var(--line);
       padding: 8px 14px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-weight: 700;
+      font-size: .82em;
+      text-transform: uppercase;
+      letter-spacing: .04em;
       cursor: pointer;
       transition: all .2s;
     }
 
     .toggle-today.active {
-      background: #2b6cb0;
-      color:#ffffff;
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
     }
 
     .day-section {
-      margin-bottom: 30px;
+      margin-bottom: 8px;
       scroll-margin-top: 100px;
     }
 
     .day-header {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 15px 20px;
+      background: transparent;
+      border-top: 1px solid var(--line);
+      border-bottom: none;
+      border-radius: 0;
+      padding: 18px 4px 12px;
       margin-bottom: 0;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.07);
       display: flex;
       justify-content: space-between;
       align-items: center;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.2s;
     }
 
-    .day-header:hover { background: #f7fafc; }
+    .day-header:hover { background: var(--panel-2); }
 
-    .day-header.past { opacity: 0.6; }
+    .day-header.past { opacity: 0.55; }
 
     .day-header.today {
-      background: linear-gradient(135deg, #fefcbf 0%, #e0f2fe 100%);
-      border: 2px solid #2b6cb0;
+      background: transparent;
+      border-top: 1px solid var(--accent-soft);
     }
 
     .today-badge {
-      background: #2b6cb0;
-      color: #ffffff;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.85em;
-      font-weight: bold;
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-size: 0.72em;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .06em;
       margin-left: 10px;
     }
 
     .collapse-icon {
-      font-size: 1.2em;
+      font-size: 1.1em;
+      color: var(--ink-dim);
       transition: transform 0.3s;
     }
 
@@ -307,111 +342,138 @@ header .intro p {
     .day-content.collapsed { max-height: 0 !important; }
 
     .day-title {
-      color: #2b6cb0;
-      font-size: 1.5em;
-      font-weight: bold;
+      color: var(--ink);
+      font-size: 1.15em;
+      font-weight: 700;
     }
 
     .events-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-      gap: 20px;
+      display: flex;
+      flex-direction: column;
     }
 
     .event-card {
-      background: #ffffff;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      transition: transform 0.3s, box-shadow 0.3s;
-      border-left: 5px solid #3182ce;
+      background: transparent;
+      border-radius: 0;
+      padding: 16px 4px;
+      box-shadow: none;
+      transition: background .2s;
+      border-top: 1px solid var(--line);
+      border-left: none;
       scroll-margin-top: 120px;
+      display: grid;
+      grid-template-columns: 78px 1fr auto;
+      gap: 18px;
+      align-items: start;
+    }
+    .event-card .event-time{ margin-bottom:0; padding-top:2px; }
+    .event-card .event-body{ min-width:0; }
+    .event-card .event-actions{ display:flex; gap:8px; flex-wrap:wrap; align-self:center; }
+
+    @media (max-width: 640px) {
+      .event-card{ grid-template-columns: 1fr; gap:6px; }
+      .event-card .event-actions{ margin-top:8px; }
     }
 
     .event-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      transform: none;
+      box-shadow: none;
+      background: var(--panel-2);
     }
 
     .event-time {
-      color: #2b6cb0;
-      font-weight: bold;
-      font-size: 1.1em;
-      margin-bottom: 10px;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      font-size: 1.05em;
+      margin-bottom: 8px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .event-title {
-      color: #1a202c;
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 10px;
+      color: var(--ink);
+      font-size: 1.08em;
+      font-weight: 700;
+      margin-bottom: 8px;
       line-height: 1.4;
     }
 
     .event-organizer {
-      color: #4a5568;
-      font-size: 0.9em;
-      margin-bottom: 15px;
-      font-style: italic;
+      color: var(--ink-dim);
+      font-size: 0.88em;
+      margin-bottom: 12px;
+      font-style: normal;
     }
 
     .event-link,
     .ics-btn {
       display: inline-block;
-      background: #3182ce;
-      color: #ffffff;
-      padding: 10px 16px;
-      border-radius: 8px;
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 5px;
       text-decoration: none;
-      font-weight: bold;
-      transition: all 0.3s;
-      border: none;
+      font-weight: 700;
+      font-size: .85em;
+      transition: all 0.2s;
       cursor: pointer;
     }
 
     .event-link:hover,
     .ics-btn:hover {
-      transform: scale(1.03);
-      box-shadow: 0 5px 15px rgba(49,130,206,0.4);
-      background: #2b6cb0;
+      transform: none;
+      box-shadow: none;
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
+    .event-link {
+      background: var(--accent);
+      color: var(--accent-ink);
+      border-color: var(--accent);
+    }
+    .event-link:hover{ background:#d9b06f; color:var(--accent-ink); }
+
     .btn-secondary {
-      background: #ffffff;
-      color: #3182ce;
-      border: 2px solid #3182ce;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
+      background: var(--panel-2);
+      color: var(--ink-dim);
+      border: 1px solid var(--line);
+      padding: 9px 15px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: .85em;
       cursor: pointer;
-      transition: all .3s;
+      transition: all .2s;
     }
 
     .btn-secondary:hover {
-      background: #3182ce;
-      color: #ffffff;
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .category-tag {
       display: inline-block;
-      background: #ebf8ff;
-      color: #2b6cb0;
-      padding: 5px 12px;
-      border-radius: 15px;
-      font-size: 0.85em;
+      background: var(--panel-2);
+      color: var(--ink-dim);
+      border: 1px solid var(--line);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.76em;
       margin-bottom: 10px;
       font-weight: 600;
+      letter-spacing: .02em;
     }
 
     .stats {
-      background: #ffffff;
-      border-radius: 15px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
       padding: 20px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 24px;
       display: flex;
       justify-content: space-around;
       flex-wrap: wrap;
@@ -421,44 +483,48 @@ header .intro p {
     .stat-item { text-align: center; }
 
     .stat-number {
-      font-size: 2.5em;
-      color: #2b6cb0;
-      font-weight: bold;
+      font-size: 2.1em;
+      color: var(--accent);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
     }
 
     .stat-label {
-      color: #4a5568;
-      font-size: 1em;
+      color: var(--ink-dim);
+      font-size: .78em;
+      text-transform: uppercase;
+      letter-spacing: .04em;
     }
 
-    .small-note { font-size: .85em; color:#4a5568; }
+    .small-note { font-size: .85em; color:var(--ink-dim); }
 
     .archive {
-      background: #ffffff;
-      border-radius: 15px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
       padding: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       margin-top: 24px;
     }
 
     .accordion {
-      border-top: 1px solid #e2e8f0;
+      border-top: 1px solid var(--line);
       margin-top: 10px;
     }
 
-    .accordion-item { border-bottom: 1px solid #e2e8f0; }
+    .accordion-item { border-bottom: 1px solid var(--line); }
 
     .accordion-header {
       width: 100%;
       text-align: left;
-      background: #f7fafc;
-      border: 1px solid #dbeafe;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
       padding: 12px 14px;
-      border-radius: 10px;
+      border-radius: 6px;
       margin: 10px 0;
       cursor: pointer;
-      font-weight: 600;
-      color: #2b6cb0;
+      font-weight: 700;
+      color: var(--ink);
       display:flex;
       align-items:center;
       justify-content:space-between;
@@ -469,45 +535,46 @@ header .intro p {
     .accordion-header.open + .accordion-content { display: block; }
 
     .resources-section {
-      background: #ffffff;
-      border-radius: 15px;
-      padding: 30px;
-      margin-bottom: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 28px 30px;
+      margin-bottom: 24px;
     }
 
     .resources-section h2 {
-      color: #2b6cb0;
-      font-size: 1.8em;
-      margin-bottom: 20px;
-      border-bottom: 3px solid #3182ce;
-      padding-bottom: 10px;
+      color: var(--ink);
+      font-size: 1.5em;
+      font-weight: 800;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 12px;
     }
 
     .resource-collapse-header {
-      color: #2b6cb0;
-      font-size: 1.3em;
-      margin: 25px 0 15px 0;
+      color: var(--ink);
+      font-size: 1.05em;
+      font-weight: 700;
+      margin: 22px 0 14px 0;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 15px;
-      background: #f7fafc;
-      border: 1px solid #dbeafe;
-      border-radius: 10px;
-      transition: all 0.3s;
+      padding: 11px 14px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      transition: all 0.2s;
     }
 
     .resource-collapse-header:hover {
-      background: #edf2f7;
-      border-color: #3182ce;
+      border-color: var(--accent);
     }
 
     .resource-collapse-header .collapse-icon {
       font-size: 1em;
       transition: transform 0.3s;
-      color: #3182ce;
+      color: var(--accent);
     }
 
     .resource-collapse-header.collapsed .collapse-icon {
@@ -522,217 +589,236 @@ header .intro p {
     .resource-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 15px;
+      gap: 14px;
       margin-bottom: 20px;
     }
 
     .resource-card {
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 8px;
       padding: 15px;
-      transition: all 0.3s;
+      transition: all 0.2s;
       cursor: pointer;
     }
 
     .resource-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(49,130,206,0.25);
-      border-color: #3182ce;
+      transform: none;
+      box-shadow: none;
+      border-color: var(--accent);
     }
 
     .resource-card h4 {
-      color: #2b6cb0;
-      font-size: 1.1em;
+      color: var(--ink);
+      font-size: 1.02em;
+      font-weight: 700;
       margin-bottom: 8px;
     }
 
     .resource-card p {
-      color: #4a5568;
-      font-size: 0.9em;
+      color: var(--ink-dim);
+      font-size: 0.88em;
       line-height: 1.4;
     }
 
     .resource-link {
-      color: #3182ce;
+      color: var(--accent);
       text-decoration: none;
-      font-weight: bold;
-      font-size: 0.9em;
+      font-weight: 700;
+      font-size: 0.88em;
       display: inline-block;
       margin-top: 8px;
     }
 
     .resource-link:hover { text-decoration: underline; }
 
-    .intro .weekly-update { 
+    .intro .weekly-update {
       margin-bottom: 28px;
     }
 
     .featured-gold {
-      border: 3px solid #ecc94b !important;
-      background: linear-gradient(135deg,#fefcbf 0%, #fffaf0 100%) !important;
+      border: 1px solid var(--accent) !important;
+      background: var(--panel-2) !important;
       position: relative;
     }
 
     .featured-gold .featured-badge {
-      background: #d69e2e;
-      color: #000;
+      background: var(--accent);
+      color: var(--accent-ink);
       font-weight: 800;
-      font-size: 0.75rem;
-      letter-spacing: .5px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      box-shadow: 0 2px 8px rgba(214,158,46,.25);
+      font-size: 0.72rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 12px;
+      right: 12px;
     }
 
     .featured-gold .resource-cta {
-      background: linear-gradient(135deg,#f6e05e 0%, #ecc94b 100%);
-      color: #000;
+      background: var(--accent);
+      color: var(--accent-ink);
       font-weight: 700;
       border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
+      border-radius: 5px;
+      padding: 9px 15px;
       cursor: pointer;
-      box-shadow: 0 6px 16px rgba(214,158,46,.25);
-      transition: transform .2s ease, box-shadow .2s ease;
+      transition: background .2s ease;
     }
 
     .featured-gold .resource-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px rgba(214,158,46,.35);
+      background: #d9b06f;
     }
 
     .event-card.certified {
-      background: #f3fbf6;
-      border-left-color: #68d391;
+      background: transparent;
+      border-left-color: transparent;
     }
 
     .badge {
       display: inline-block;
-      padding: 2px 8px;
-      font-size: 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(0,0,0,.06);
+      padding: 2px 9px;
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      color: var(--ink-dim);
       margin-left: 8px;
     }
 
     .badge-cert {
-      background: #e9f8ef;
-      border-color: #c6f6d5;
-      color: #276749;
+      background: transparent;
+      border-color: var(--cert);
+      color: var(--cert);
     }
 
     .badge-lang {
-      background: #ebf8ff;
-      border-color: #bfdbfe;
-      color: #1d4ed8;
+      background: transparent;
+      border-color: var(--line);
+      color: var(--ink-dim);
       margin-left: 0;
     }
 
     .badge-ongoing{
-  background:#ecfdf5;
-  border-color:#bbf7d0;
-  color:#166534;
+  background:transparent;
+  border-color:var(--accent);
+  color:var(--accent);
   font-weight:800;
 }
 
 .event-card.ongoing{
-  border-left-color:#22c55e;
-  box-shadow: 0 10px 24px rgba(34,197,94,0.18);
+  border-left-color:transparent;
+  box-shadow:none;
+  background: rgba(201,161,95,.06);
 }
 
 .badge-today{
-  background:#eff6ff;
-  border-color:#bfdbfe;
-  color:#1d4ed8;
+  background:transparent;
+  border-color:var(--accent);
+  color:var(--accent);
   font-weight:800;
 }
 
 .badge-tomorrow{
-  background:#fef3c7;
-  border-color:#fde68a;
-  color:#92400e;
+  background:transparent;
+  border-color:var(--line);
+  color:var(--ink-dim);
   font-weight:700;
 }
 
 .badge-live-soon{
-  background:#fff7ed;
-  border-color:#fed7aa;
-  color:#c2410c;
+  background:transparent;
+  border-color:var(--accent);
+  color:var(--accent);
   font-weight:800;
 }
 
 .intro-short{
-  margin-top:14px;
+  margin-top:18px;
 }
 
 .intro-short p{
-  color:#2d3748;
+  color:var(--ink-dim);
   font-size:1.08em;
   line-height:1.6;
-  margin-bottom:10px;
+  margin-bottom:14px;
+  max-width:56ch;
 }
 
 .intro-short .learn-more-link{
   display:inline-block;
-  background:#ffffff;
-  color:#2b6cb0;
-  border:2px solid #2b6cb0;
-  padding:8px 14px;
-  border-radius:8px;
+  background:transparent;
+  color:var(--accent);
+  border:1px solid var(--accent);
+  padding:8px 15px;
+  border-radius:6px;
   font-weight:700;
+  font-size:.85em;
   text-decoration:none;
   transition:all .2s;
 }
 
 .intro-short .learn-more-link:hover{
-  background:#2b6cb0;
-  color:#ffffff;
+  background:var(--accent);
+  color:var(--accent-ink);
 }
+
+.telemetry{
+  font-family:var(--mono);
+  font-size:.82em;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:14px;
+  font-variant-numeric:tabular-nums;
+}
+.telemetry b{ color:var(--ink); font-weight:600; }
+
+.hero-wave{ display:block; width:100%; height:64px; margin-top:6px; opacity:.55; }
 
     .weekly-update {
       margin-top: 14px;
       padding: 16px;
-      border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      border-radius: 8px;
       text-align: center;
-      background: #ffffff;
-      border: 1px solid #e2e8f0;
+      background: var(--panel-2);
+      border: 1px solid var(--line);
     }
 
     .weekly-update h3 {
-      color: #2b6cb0;
+      color: var(--ink);
       margin-bottom: 10px;
     }
 
     .weekly-update p {
-      color: #2d3748;
+      color: var(--ink-dim);
       line-height: 1.6;
     }
 
-    
+
     .insta-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: #3182ce;
-  color: white;
+  background: var(--panel-2);
+  color: var(--ink);
+  border: 1px solid var(--line);
   padding: 8px 14px;
-  border-radius: 999px;
-  font-size: 0.9em;
-  font-weight: 600;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-weight: 700;
   text-decoration: none;
   transition: 0.2s ease;
-  box-shadow: 0 2px 6px rgba(49,130,206,0.35);
 }
 
 .insta-btn:hover {
-  background: #2b6cb0;
-  transform: translateY(-1px);
-  box-shadow: 0 5px 12px rgba(49,130,206,0.45);
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: none;
+  box-shadow: none;
 }
 
 .insta-icon {
@@ -743,15 +829,14 @@ header .intro p {
 
 
     @media (max-width: 768px) {
-      h1 { font-size: 1.8em; }
-      .events-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 1.35em; }
     }
 
-  
+
 
     /* Support the project anchor */
 .support-anchor{
-  color:#2b6cb0;
+  color:var(--accent);
   font-weight:700;
   text-decoration:none;
 }
@@ -764,15 +849,13 @@ header .intro p {
 html{
   scroll-behavior:smooth;
 }
-  
+
     @media (max-width: 768px) {
-  .events-grid,
   .resource-grid,
   .stats {
     grid-template-columns: 1fr;
   }
 
-  .event-card,
   .resource-card,
   .stat-item {
     min-width: 0;
@@ -814,11 +897,10 @@ html{
 }
 .site-footer {
   margin-top: 40px;
-  background: #ffffff;
-  border-radius: 18px;
+  background: var(--panel);
+  border-radius: 10px;
   padding: 24px;
-  border: 1px solid #e2e8f0;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border: 1px solid var(--line);
 }
 
 .footer-inner {
@@ -831,13 +913,13 @@ html{
 }
 
 .site-footer h3 {
-  color: #1e3a5f;
+  color: var(--ink);
   margin-bottom: 6px;
-  font-size: 1.15em;
+  font-size: 1.1em;
 }
 
 .site-footer p {
-  color: #64748b;
+  color: var(--ink-dim);
   line-height: 1.5;
 }
 
@@ -849,8 +931,11 @@ html{
 
 .footer-links a {
   text-decoration: none;
-  color: #1d4ed8;
-  font-weight: 600;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: .88em;
+  text-transform: uppercase;
+  letter-spacing: .03em;
 }
 
 .footer-links a:hover {
@@ -858,9 +943,10 @@ html{
 }
 
 .footer-note {
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--line);
   padding-top: 14px;
-  font-size: 0.92em;
+  font-size: 0.85em;
+  color: var(--ink-dim);
 }
   </style>
 </head>
@@ -875,12 +961,15 @@ html{
 <header>
   <!-- Logo + Título + Nav -->
   <div class="header-top">
-    <div style="display:flex; align-items:center; gap:15px;">
+    <div style="display:flex; align-items:center; gap:14px;">
       <img
         src="./IMG_5085.jpg"
         alt="CCW Logo"
-        style="height:55px; border-radius:8px; object-fit:contain;">
-      <h1>📅 CCW Academy — Critical Care Webinars</h1>
+        style="height:42px; width:42px; border-radius:7px; object-fit:cover; border:1px solid var(--line);">
+      <div>
+        <h1>CCW Academy</h1>
+        <div style="font-family:var(--mono); font-size:.66em; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); font-weight:600; margin-top:2px;">Critical Care Webinars</div>
+      </div>
     </div>
 
     <nav>
@@ -910,8 +999,13 @@ html{
 
   <!-- Intro corta -->
   <div class="intro-short">
+    <div class="telemetry" id="heroTelemetry"><b>—</b> sessions today · <b>GMT-5</b> reference · <b>—</b> this week</div>
     <p>Discover curated critical care webinars and educational events from around the world, shown in your local time.</p>
     <a href="#about-ccw" class="learn-more-link">Learn more about CCW →</a>
+    <svg class="hero-wave" viewBox="0 0 800 90" preserveAspectRatio="none" aria-hidden="true">
+      <polyline points="0,52 24,52 34,44 44,52 60,52 66,58 72,10 78,74 86,52 110,52 130,36 150,52 200,52 224,52 234,44 244,52 260,52 266,58 272,10 278,74 286,52 310,52 330,36 350,52 400,52 424,52 434,44 444,52 460,52 466,58 472,10 478,74 486,52 510,52 530,36 550,52 600,52 624,52 634,44 644,52 660,52 666,58 672,10 678,74 686,52 710,52 730,36 750,52 800,52"
+        fill="none" stroke="#c9a15f" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
   </div>
 </header>
 
@@ -924,8 +1018,8 @@ html{
 
     <div id="mainContent" style="display:none;">
       <div class="filter-actions">
-        <button id="toggleTodayBtn" class="toggle-today">🟣 Today only</button>
-        <button id="toggleLocalTimeBtn" class="toggle-today" type="button">🌍 See in my local time</button>
+        <button id="toggleTodayBtn" class="toggle-today">Today only</button>
+        <button id="toggleLocalTimeBtn" class="toggle-today" type="button">See in my local time</button>
       </div>
 
       <div class="filters">
@@ -941,17 +1035,17 @@ html{
 </label>
 
 <input type="text" id="searchFilter" placeholder="Search by topic, organizer, or specialty…">
-<button id="reloadBtn" class="btn-secondary">🔄 Refresh</button>
+<button id="reloadBtn" class="btn-secondary">Refresh</button>
       </div>
 
       <div id="eventsContainer"></div>
 
       <div class="archive" id="archiveBlock" style="display:none;">
-        <h2 style="color:#2b6cb0; margin-bottom:8px;">🗂️ Weeks archive</h2>
+        <h2 style="color:var(--accent); margin-bottom:8px;">Weeks archive</h2>
         <div class="accordion" id="archiveAccordion"></div>
       </div>
 
-      <h2 style="color:#2b6cb0; margin: 30px 0 8px 0;">📊 CCW at a glance</h2>
+      <h2 style="color:var(--accent); margin: 30px 0 8px 0;">CCW at a glance</h2>
       <div class="stats">
         <div class="stat-item">
           <div class="stat-number" id="totalEvents">0</div>
@@ -970,13 +1064,13 @@ html{
           <div class="stat-label">Events last week</div>
         </div>
         <div class="stat-item">
-          <button id="exportWeek" class="btn-secondary">📥 Export current week (.ics)</button>
+          <button id="exportWeek" class="btn-secondary">Export current week (.ics)</button>
           <div class="small-note" style="margin-top:6px">Import into Google/Outlook</div>
         </div>
       </div>
 
 <div class="resources-section" id="about-ccw">
-  <h2>ℹ️ About CCW Academy — Critical Care Webinars</h2>
+  <h2>About CCW Academy — Critical Care Webinars</h2>
   <!-- Intro completa -->
   <div class="intro">
    <div class="weekly-update">
@@ -1084,7 +1178,7 @@ html{
     </svg>
     WhatsApp
   </a>
-  <p style="margin-bottom:14px; color:#4a5568; font-size:0.95em;">
+  <p style="margin-bottom:14px; color:var(--ink-dim); font-size:0.95em;">
   If this page has been useful to you, remember that you can
   <a href="#support-ccw" class="support-anchor">support the project</a>
   and help Critical Care Webinars continue growing.
@@ -1103,10 +1197,10 @@ html{
 </div>
 
 <div class="resources-section" id="resources-section-main">
-        <h2>📚 Resources for Intensivists & Simulationists</h2>
+        <h2>Resources for Intensivists & Simulationists</h2>
         
         <h3 class="resource-collapse-header" data-section="courses">
-          <span>🎓 Recommended Courses</span>
+          <span>Recommended Courses</span>
           <span class="collapse-icon">▼</span>
         </h3>
         <div class="resource-collapsible-content" id="courses-content">
@@ -1117,7 +1211,7 @@ html{
                  aria-label="Competencias Docentes para el entorno clínico de aprendizaje">
               <div class="featured-badge">FEATURED</div>
               <h4>🩺 Competencias Docentes para el entorno clínico de aprendizaje</h4>
-              <ul style="margin:8px 0 10px 18px; color:#2d3748; font-size:0.95em; line-height:1.4;">
+              <ul style="margin:8px 0 10px 18px; color:var(--ink); font-size:0.95em; line-height:1.4;">
                 <li><strong>Diseñado por:</strong> Dr. Ismael David Piedra</li>
                 <li><strong>Modalidad:</strong> Autogestiva</li>
                 <li><strong>Organiza:</strong> AMFEM (Asociación Mexicana de Facultades y Escuelas de Medicina, A.C.)</li>
@@ -1131,10 +1225,10 @@ html{
                  aria-label="Curso de Sepsis OPS/FEPIMCTI gratuito">
               <div class="featured-badge">FEATURED</div>
               <h4>🧬 Curso de Sepsis OPS / FEPIMCTI</h4>
-              <ul style="margin:8px 0 10px 18px; color:#2d3748; font-size:0.95em; line-height:1.4;">
+              <ul style="margin:8px 0 10px 18px; color:var(--ink); font-size:0.95em; line-height:1.4;">
                 <li><strong>Organiza:</strong> Organización Panamericana de la Salud (OPS) &amp; FEPIMCTI</li>
                 <li><strong>Dirigido a:</strong> Profesionales de cuidados críticos y urgencias</li>
-                <li><strong>Modalidad:</strong> En línea, autogestivo y <span style="color:#2f855a;font-weight:600;">GRATUITO</span></li>
+                <li><strong>Modalidad:</strong> En línea, autogestivo y <span style="color:var(--cert);font-weight:600;">GRATUITO</span></li>
               </ul>
               <button class="resource-cta">🌐 Ir al curso gratuito</button>
             </div>
@@ -1145,7 +1239,7 @@ html{
                  aria-label="Introducción a la Enseñanza Basada en Simulación Clínica">
               <div class="featured-badge">FEATURED</div>
               <h4>🎓 Introducción a la Enseñanza Basada en Simulación Clínica </h4>
-              <ul style="margin:8px 0 10px 18px; color:#2d3748; font-size:0.95em; line-height:1.4;">
+              <ul style="margin:8px 0 10px 18px; color:var(--ink); font-size:0.95em; line-height:1.4;">
                 <li><strong>Enfocado en:</strong> docencia y aprendizaje basado en simulación</li>
                 <li><strong>Dirigido a:</strong> profesionales de salud y educadores</li>
                 <li><strong>Modalidad:</strong> online</li>
@@ -1230,15 +1324,15 @@ html{
      style="margin-top: 20px;"
      onclick="window.open('https://drive.google.com/file/d/1i1EGQC0WAzzSvxYgb22zsd7u7EPLDVDB/view?usp=sharing', '_blank')">
   <div class="featured-badge">FEATURED</div>
-  <h4 style="color:#b8860b;">📘 Ferrero, F. – El Universo Educativo es una Simulación (Book)</h4>
-  <p style="color:#2d3748; font-weight:500;">A reference work by Dr. Federico Ferrero — essential reading on simulation pedagogy, debriefing, and patient safety frameworks.</p>
+  <h4 style="color:var(--accent);">📘 Ferrero, F. – El Universo Educativo es una Simulación (Book)</h4>
+  <p style="color:var(--ink); font-weight:500;">A reference work by Dr. Federico Ferrero — essential reading on simulation pedagogy, debriefing, and patient safety frameworks.</p>
   <button class="resource-cta">Open book (Google Drive) →</button>
 </div>
           </div>
         </div>
 
         <h3 class="resource-collapse-header collapsed" data-section="apps">
-          <span>📱 Essential Apps for Intensivists</span>
+          <span>Essential Apps for Intensivists</span>
           <span class="collapse-icon">▼</span>
         </h3>
         <div class="resource-collapsible-content" id="apps-content" style="max-height:0;">
@@ -1360,7 +1454,7 @@ html{
         </div>
 
         <h3 class="resource-collapse-header collapsed" data-section="simulation">
-          <span>🎮 Apps for Simulation</span>
+          <span>Apps for Simulation</span>
           <span class="collapse-icon">▼</span>
         </h3>
         <div class="resource-collapsible-content" id="simulation-content" style="max-height:0;">
@@ -1440,11 +1534,11 @@ html{
         </div>
 
         <h3 class="resource-collapse-header collapsed" data-section="podcasts">
-          <span>🎧 Recommended Podcasts</span>
+          <span>Recommended Podcasts</span>
           <span class="collapse-icon">▼</span>
         </h3>
         <div class="resource-collapsible-content" id="podcasts-content" style="max-height:0;">
-          <p style="color:#4a5568; margin-bottom:14px;">
+          <p style="color:var(--ink-dim); margin-bottom:14px;">
             Explore global voices in critical care, ECMO, cardiology, simulation, and patient safety.
             Each podcast offers a unique perspective on innovation, leadership, and frontline experience.
           </p>
@@ -1531,7 +1625,7 @@ html{
         </div>
 
         <h3 class="resource-collapse-header collapsed" data-section="youtube">
-          <span>📺 Recommended YouTube Channels</span>
+          <span>Recommended YouTube Channels</span>
           <span class="collapse-icon">▼</span>
         </h3>
         <div class="resource-collapsible-content" id="youtube-content" style="max-height:0;">
@@ -1653,44 +1747,44 @@ html{
         </div>
       </div>
 <div class="resources-section" id="support-ccw">
-  <h2>❤️ Support CCW Academy</h2>
+  <h2>Support CCW Academy</h2>
 
-  <p style="font-size:1em; color:#2d3748; line-height:1.6;">
+  <p style="font-size:1em; color:var(--ink); line-height:1.6;">
     <strong>Critical Care Webinars</strong> is a collaborative, non-profit educational initiative that curates global webinars, courses, and podcasts in intensive care, simulation, and medical innovation.
     We are committed to keeping this resource open, free, and continuously updated for the entire healthcare community.
   </p>
 
   <h3 class="resource-collapse-header collapsed" data-section="support">
-    <span>💰 Support options</span>
+    <span>Support options</span>
     <span class="collapse-icon">▼</span>
   </h3>
   <div class="resource-collapsible-content" id="support-content" style="max-height:0;">
     <div style="margin-top:10px; display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px;">
 
-      <div style="background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
-        <h4 style="color:#2b6cb0; margin-bottom:14px;">🇵🇪 Perú</h4>
+      <div style="background:var(--panel-2); border:1px dashed var(--accent-soft); border-radius:10px; padding:18px;">
+        <h4 style="color:var(--accent); margin-bottom:14px;">Perú</h4>
 
         <div style="margin-bottom:16px;">
-          <div style="font-weight:700; color:#2d3748; margin-bottom:6px;">Yape</div>
+          <div style="font-weight:700; color:var(--ink); margin-bottom:6px;">Yape</div>
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
-            <span style="font-family:monospace; font-size:1.05em; background:#f7fafc; padding:4px 10px; border-radius:6px;">921 911 149</span>
+            <span style="font-family:monospace; font-size:1.05em; background:var(--panel); padding:4px 10px; border-radius:6px;">921 911 149</span>
             <button type="button" class="btn-secondary copy-btn" data-copy="921911149" style="padding:5px 12px; font-size:0.85em;">📋 Copy</button>
           </div>
-          <img src="./yape-qr.jpg" alt="Yape QR code" style="width:140px; height:auto; border-radius:8px; border:1px solid #e2e8f0;">
+          <img src="./yape-qr.jpg" alt="Yape QR code" style="width:140px; height:auto; border-radius:8px; border:1px solid var(--line);">
         </div>
 
         <div>
-          <div style="font-weight:700; color:#2d3748; margin-bottom:6px;">Plin</div>
+          <div style="font-weight:700; color:var(--ink); margin-bottom:6px;">Plin</div>
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap; margin-bottom:8px;">
-            <span style="font-family:monospace; font-size:1.05em; background:#f7fafc; padding:4px 10px; border-radius:6px;">921 911 149</span>
+            <span style="font-family:monospace; font-size:1.05em; background:var(--panel); padding:4px 10px; border-radius:6px;">921 911 149</span>
             <button type="button" class="btn-secondary copy-btn" data-copy="921911149" style="padding:5px 12px; font-size:0.85em;">📋 Copy</button>
           </div>
-          <img src="./plin-qr.jpg" alt="Plin QR code" style="width:140px; height:auto; border-radius:8px; border:1px solid #e2e8f0;">
+          <img src="./plin-qr.jpg" alt="Plin QR code" style="width:140px; height:auto; border-radius:8px; border:1px solid var(--line);">
         </div>
       </div>
 
-      <div style="background:#ffffff; border:2px dashed #3182ce; border-radius:10px; padding:18px;">
-        <h4 style="color:#2b6cb0; margin-bottom:14px;">🌍 Internacional</h4>
+      <div style="background:var(--panel-2); border:1px dashed var(--accent-soft); border-radius:10px; padding:18px;">
+        <h4 style="color:var(--accent); margin-bottom:14px;">Internacional</h4>
 
         <div style="display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-bottom:16px;">
           <a href="https://www.paypal.me/CCWebinars"
@@ -1708,32 +1802,32 @@ html{
         </div>
 
         <details style="margin-bottom:16px;">
-          <summary style="cursor:pointer; font-weight:700; color:#2b6cb0;">🏦 Bank transfer (USD / ACH)</summary>
-          <ul style="list-style:none; padding-left:0; line-height:1.9; color:#2d3748; margin-top:10px; font-size:0.92em;">
+          <summary style="cursor:pointer; font-weight:700; color:var(--accent);">Bank transfer (USD / ACH)</summary>
+          <ul style="list-style:none; padding-left:0; line-height:1.9; color:var(--ink); margin-top:10px; font-size:0.92em;">
             <li><strong>Account holder:</strong> Jiovany Jhan Carlos Saldaña Gastulo</li>
             <li>
               <strong>Account number:</strong> <span style="font-family:monospace;">8332231787</span>
-              <button type="button" class="copy-btn" data-copy="8332231787" style="border:none; background:none; color:#2b6cb0; cursor:pointer; font-size:0.85em;">📋</button>
+              <button type="button" class="copy-btn" data-copy="8332231787" style="border:none; background:none; color:var(--accent); cursor:pointer; font-size:0.85em;">📋</button>
             </li>
             <li><strong>Account type:</strong> Checking</li>
             <li>
               <strong>ACH routing number:</strong> <span style="font-family:monospace;">026073150</span>
-              <button type="button" class="copy-btn" data-copy="026073150" style="border:none; background:none; color:#2b6cb0; cursor:pointer; font-size:0.85em;">📋</button>
+              <button type="button" class="copy-btn" data-copy="026073150" style="border:none; background:none; color:var(--accent); cursor:pointer; font-size:0.85em;">📋</button>
             </li>
             <li><strong>Bank:</strong> Community Federal Savings Bank</li>
             <li><strong>Bank address:</strong> 5 Penn Plaza, 14th Floor, New York, NY 10001, US</li>
           </ul>
         </details>
 
-        <ul style="list-style:none; padding-left:0; line-height:1.8; color:#2d3748;">
+        <ul style="list-style:none; padding-left:0; line-height:1.8; color:var(--ink);">
           <li><strong>BTC:</strong> <em>1Cy8uxDTQ6CWbxFxAQX88NTHh7EWZc2Z5A</em></li>
           <li><strong>BNB:</strong> <em>3Lrosc3SFc5N9buFD4SHoHw98Tc11iYidQ</em></li>
         </ul>
       </div>
     </div>
 
-    <p style="color:#4a5568; font-size:0.9em; margin-top:14px;">
-      Your support helps sustain and expand open-access medical education for clinicians worldwide 🌍
+    <p style="color:var(--ink-dim); font-size:0.9em; margin-top:14px;">
+      Your support helps sustain and expand open-access medical education for clinicians worldwide
     </p>
   </div>
 </div>
@@ -1922,13 +2016,23 @@ const WEEKS = getDynamicWeeks();
         if (!btn) return;
         if (timeMode === 'local') {
           btn.classList.add('active');
-          btn.textContent = '🇵🇪 Show Lima time';
+          btn.textContent = 'Show Lima time';
           if (note) note.textContent = `Times shown in your local time (${VISITOR_TZ})`;
         } else {
           btn.classList.remove('active');
-          btn.textContent = '🌍 See in my local time';
+          btn.textContent = 'See in my local time';
           if (note) note.textContent = 'Times shown in Lima, Perú (GMT-5)';
         }
+        updateHeroTelemetry();
+      }
+
+      function updateHeroTelemetry() {
+        const el = document.getElementById('heroTelemetry');
+        if (!el) return;
+        const todayStr = getTodayStrForMode();
+        const todayCount = events.filter(ev => getDisplayInfo(ev).date === todayStr).length;
+        const tzLabel = timeMode === 'lima' ? 'GMT-5' : VISITOR_TZ;
+        el.innerHTML = `<b>${todayCount}</b> sessions today · <b>${tzLabel}</b> reference · <b>${events.length}</b> this week`;
       }
 
       function buildEventCardHTML(ev, todayStr, icsButtonHTML) {
@@ -1949,24 +2053,25 @@ const WEEKS = getDynamicWeeks();
         if (ongoing) classes.push('ongoing');
 
         const html = `
-              <div class="category-tag">${ev.category || 'General'}</div>
-              <div class="event-time">🕐 ${disp.time}</div>
-              <div class="event-title">
+              <div class="event-time">${disp.time}</div>
+              <div class="event-body">
+                <div class="category-tag">${ev.category || 'General'}</div>
+                <div class="event-title">
   ${ev.title}
-  ${ongoing ? '<span class="badge badge-ongoing">🟢 ONGOING</span>' : ''}
-  ${liveSoon ? '<span class="badge badge-live-soon">🟠 Live soon</span>' : ''}
+  ${ongoing ? '<span class="badge badge-ongoing">Ongoing</span>' : ''}
+  ${liveSoon ? '<span class="badge badge-live-soon">Live soon</span>' : ''}
   ${dayBadge}
   ${isCertified ? '<span class="badge badge-cert">Certified</span>' : ''}
 </div>
-
-              <div class="event-organizer">📍 ${ev.organizer || '—'}</div>
-              <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin: 6px 0 10px 0;">
-                ${ev.language ? `<span class="badge badge-lang">${ev.language}</span>` : ''}
+                <div class="event-organizer">${ev.organizer || '—'}</div>
+                <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center; margin-top:6px;">
+                  ${ev.language ? `<span class="badge badge-lang">${ev.language}</span>` : ''}
+                </div>
               </div>
-              <div style="display:flex; gap:10px; flex-wrap:wrap;">
+              <div class="event-actions">
                 ${ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener noreferrer" class="event-link">Join →</a>` : ''}
                 ${icsButtonHTML}
-                <a href="${whatsappShareUrl(ev, disp.date, disp.time)}" target="_blank" rel="noopener noreferrer" class="event-link" style="background:#25d366;">📤 Share</a>
+                <a href="${whatsappShareUrl(ev, disp.date, disp.time)}" target="_blank" rel="noopener noreferrer" class="event-link" style="background:#25d366;">Share</a>
               </div>
             `;
 
@@ -2268,11 +2373,11 @@ function isOngoingEvent(ev) {
 
           dayHeader.innerHTML = `
             <div style="display:flex; align-items:center;">
-              <div class="day-title">${(dayNames[date] || formatDayLabel(date))} <span style="color:#718096; font-weight:600;">(${count})</span></div>
-              ${isToday ? '<span class="today-badge">📍 TODAY</span>' : ''}
+              <div class="day-title">${(dayNames[date] || formatDayLabel(date))} <span style="color:var(--ink-dim); font-weight:600;">(${count})</span></div>
+              ${isToday ? '<span class="today-badge">Today</span>' : ''}
             </div>
             <div style="display:flex; align-items:center; gap:15px;">
-              <button class="btn-secondary" data-day-export="1">📥 Export day (.ics)</button>
+              <button class="btn-secondary" data-day-export="1">Export day (.ics)</button>
               <span class="collapse-icon">${shouldCollapse ? '▶' : '▼'}</span>
             </div>
           `;
@@ -2361,7 +2466,7 @@ function isOngoingEvent(ev) {
         const exportBtn = document.createElement('button');
         exportBtn.className = 'btn-secondary';
         exportBtn.style.margin = '6px 0 12px 0';
-        exportBtn.textContent = '📥 Export week (.ics)';
+        exportBtn.textContent = 'Export week (.ics)';
         exportBtn.onclick = () => exportICS(data.flat, `events_${week.label.replace(/\s+/g, '_')}.ics`);
         content.appendChild(exportBtn);
 
@@ -2375,8 +2480,8 @@ function isOngoingEvent(ev) {
           const dayHeader = document.createElement('div');
           dayHeader.className = 'day-header';
           dayHeader.innerHTML = `
-            <div class="day-title">${(week.dayNames[date] || date)} <span style="color:#718096; font-weight:600;">(${list.length})</span></div>
-            <button class="btn-secondary" data-archived-day="${weekKey}__${date}">📥 Export day (.ics)</button>
+            <div class="day-title">${(week.dayNames[date] || date)} <span style="color:var(--ink-dim); font-weight:600;">(${list.length})</span></div>
+            <button class="btn-secondary" data-archived-day="${weekKey}__${date}">Export day (.ics)</button>
           `;
           wrap.appendChild(dayHeader);
 
@@ -2451,6 +2556,7 @@ function isOngoingEvent(ev) {
         });
 
         renderEvents(out, dayNames);
+        updateHeroTelemetry();
       }
 
     function toICS(list) {
@@ -2723,7 +2829,7 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
           showTodayOnly = false;
           const btn = document.getElementById('toggleTodayBtn');
           btn.classList.remove('active');
-          btn.textContent = '🟣 Today only';
+          btn.textContent = 'Today only';
           filterEvents(WEEKS.find(w => w.key === 'current').dayNames);
         };
         document.getElementById('exportWeek').onclick = () => exportICS(events, 'events-current-week.ics');
@@ -2735,7 +2841,7 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
             btn.textContent = '↩️ Show all';
           } else {
             btn.classList.remove('active');
-            btn.textContent = '🟣 Today only';
+            btn.textContent = 'Today only';
             document.getElementById('dayFilter').value = 'all';
           }
           filterEvents(WEEKS.find(w => w.key === 'current').dayNames);

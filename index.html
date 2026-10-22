@@ -951,6 +951,49 @@ html{
   </style>
 </head>
 <body>
+<!-- INICIO: CCW × SIMULAMOS (banner) | ver cierre del widget antes de </body> -->
+<style>
+.ccws-banner{position:sticky;top:0;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:12px 44px 12px 16px;background:var(--panel);border-bottom:1px solid var(--line);color:var(--ink);font:600 13px/1.5 -apple-system,"Segoe UI",sans-serif;text-align:center;z-index:50}
+.ccws-banner strong{color:var(--accent)}
+.ccws-banner button{font:inherit;cursor:pointer}
+.ccws-banner .ccws-banner-action{background:var(--accent);color:var(--accent-ink);border:0;border-radius:6px;padding:7px 14px;font-weight:700}
+.ccws-banner .ccws-banner-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:transparent;color:var(--ink-dim);border:0;font-size:20px;line-height:1}
+.ccws-overlay[hidden],.ccws-banner[hidden]{display:none!important}
+.ccws-overlay{position:fixed;inset:0;background:rgba(10,14,28,.78);z-index:2147483600;display:grid;place-items:center;padding:16px;overflow-y:auto;overscroll-behavior:contain}
+.ccws-dialog{position:relative;max-width:760px;width:100%;max-height:calc(100dvh - 32px);overflow-y:auto;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:10px;font-family:-apple-system,"Segoe UI",sans-serif;box-sizing:border-box}
+.ccws-dialog *{box-sizing:border-box}
+.ccws-close{position:absolute;top:12px;right:13px;z-index:1;width:34px;height:34px;border:1px solid var(--line);border-radius:6px;font-size:20px;background:var(--panel-2);color:var(--ink);cursor:pointer}
+.ccws-inner{padding:26px}
+.ccws-logos{display:flex;justify-content:center;align-items:center;gap:18px;padding:0 28px 18px;border-bottom:1px solid var(--line)}
+.ccws-logos img:first-child{width:150px;max-height:62px;object-fit:contain}
+.ccws-logos img:last-child{width:190px;max-height:70px;object-fit:contain}
+.ccws-cross{font-size:22px;color:var(--ink-dim)}
+.ccws-cols{display:grid;grid-template-columns:1fr 0.82fr;align-items:center;gap:22px;margin:20px 0 16px}
+.ccws-eyebrow{display:inline-block;background:transparent;color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:4px 10px;font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.ccws-title{font-size:clamp(22px,3vw,28px);font-weight:800;line-height:1.18;letter-spacing:-.015em;margin:14px 0;color:var(--ink)}
+.ccws-desc{font-size:14.5px;line-height:1.6;color:var(--ink-dim)}
+.ccws-desc strong{color:var(--ink)}
+.ccws-course{width:100%;border-radius:8px;border:1px solid var(--line);display:block}
+.ccws-offer{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 18px;background:var(--panel-2);border:1px dashed var(--accent-soft);border-radius:8px}
+.ccws-offer-label{display:block;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim)}
+.ccws-percent{font-family:var(--mono);font-weight:700;color:var(--accent);font-size:28px;line-height:1.15}
+.ccws-coupon{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.ccws-code{font-family:var(--mono);font-size:18px;font-weight:700;letter-spacing:.06em;padding:8px 12px;background:var(--panel);color:var(--ink);border:1px dashed var(--accent);border-radius:6px}
+.ccws-copy{border:1px solid var(--line);background:var(--panel);color:var(--ink);padding:10px 14px;border-radius:6px;font-weight:700;font-size:.88em;cursor:pointer}
+.ccws-copy:hover{border-color:var(--accent);color:var(--accent)}
+.ccws-link{display:block;text-align:center;background:var(--accent);color:var(--accent-ink)!important;text-decoration:none;border-radius:6px;padding:13px 18px;margin-top:14px;font-size:14.5px;font-weight:700}
+.ccws-link:hover{background:#d9b06f}
+.ccws-note{color:var(--ink-dim);font-size:11px;line-height:1.5;text-align:center;margin:12px 2px 0}
+.ccws-dialog button:focus-visible,.ccws-dialog a:focus-visible,.ccws-banner button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:640px){.ccws-inner{padding:18px}.ccws-logos{gap:10px;padding:0 30px 14px 0}.ccws-logos img:first-child{width:105px}.ccws-logos img:last-child{width:150px}.ccws-cross{font-size:16px}.ccws-cols{grid-template-columns:1fr;gap:13px;margin:16px 0}.ccws-title{font-size:21px;margin:10px 0}.ccws-desc{font-size:13.5px}.ccws-course{width:min(100%,260px);max-height:160px;object-fit:cover;object-position:50% 12%;margin:auto}.ccws-percent{font-size:24px}.ccws-offer{padding:12px}.ccws-code{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.ccws-dialog{scroll-behavior:auto}}
+</style>
+<div class="ccws-banner" id="ccws-banner" hidden aria-label="Alianza CCW y Simulamos">
+  <span>CCW × Simulamos: <strong>20% de descuento</strong> en el curso de simulación clínica con <strong>CCW20</strong></span>
+  <button class="ccws-banner-action" type="button" id="ccws-banner-open">Ver beneficio</button>
+  <button class="ccws-banner-close" type="button" id="ccws-banner-close" aria-label="Ocultar anuncio">×</button>
+</div>
+<!-- FIN banner CCW × SIMULAMOS -->
   <div class="container">
 
      <img
@@ -2912,5 +2955,41 @@ document.getElementById('archiveBlock').style.display = hasArchive ? 'block' : '
       });
     </script>
   </div>
+
+<!-- CCW × SIMULAMOS (modal, dispara solo con el botón del banner) -->
+<div class="ccws-overlay" id="ccws-overlay" hidden>
+  <section class="ccws-dialog" id="ccws-dialog" role="dialog" aria-modal="true" aria-labelledby="ccws-title" aria-describedby="ccws-desc" tabindex="-1">
+    <button class="ccws-close" type="button" id="ccws-close" aria-label="Cerrar promoción">×</button>
+    <div class="ccws-inner">
+      <div class="ccws-logos"><img src="assets/alianza-simulamos/ccw-logo.webp" alt="CCW Critical Care Webinars" loading="lazy"><span class="ccws-cross" aria-hidden="true">×</span><img src="assets/alianza-simulamos/simulamos-logo.webp" alt="Simulamos.com" loading="lazy"></div>
+      <div class="ccws-cols"><div><span class="ccws-eyebrow">Nueva alianza académica</span><h2 class="ccws-title" id="ccws-title">Un beneficio exclusivo para nuestra comunidad</h2><p class="ccws-desc" id="ccws-desc">CCW y Simulamos se unen para ofrecerte <strong>20% de descuento</strong> en el curso <strong>Introducción a la Enseñanza Basada en Simulación Clínica</strong>, del <strong>Dr. Federico Ferrero Etchegoyen</strong>. Formación virtual y autoadministrada.</p></div><img class="ccws-course" src="assets/alianza-simulamos/curso-simulacion.webp" alt="Portada del curso Introducción a la Enseñanza Basada en Simulación Clínica" loading="lazy"></div>
+      <div class="ccws-offer"><div><span class="ccws-offer-label">Descuento exclusivo</span><div class="ccws-percent">20% OFF</div></div><div><span class="ccws-offer-label">Código promocional</span><div class="ccws-coupon"><span class="ccws-code">CCW20</span><button class="ccws-copy" type="button" id="ccws-copy" aria-live="polite">Copiar código</button></div></div></div>
+      <a class="ccws-link" href="https://simulamos.tiendup.com/curso/introduccion-a-la-ensenanza-basada-en-simulacion-clinica" target="_blank" rel="noopener noreferrer">Conocer el curso en Simulamos ↗</a>
+      <p class="ccws-note">Beneficio aplicable exclusivamente al curso indicado. Sujeto a las condiciones de Simulamos. Confirma en la compra si el código es acumulable con otras ofertas.</p>
+    </div>
+  </section>
+</div>
+<script>
+(function(){
+ 'use strict';
+ const BANNER_KEY='ccw-simulamos-banner-closed-v1', WEEK=7*24*60*60*1000;
+ const overlay=document.getElementById('ccws-overlay'), dialog=document.getElementById('ccws-dialog'),banner=document.getElementById('ccws-banner');
+ const close=document.getElementById('ccws-close'),openBtn=document.getElementById('ccws-banner-open'), bannerClose=document.getElementById('ccws-banner-close'), copy=document.getElementById('ccws-copy');
+ let previousFocus=null,locked=false;
+ function getItem(key){try{return localStorage.getItem(key)}catch(e){return null}}
+ function setItem(key,val){try{localStorage.setItem(key,String(val))}catch(e){}}
+ function recent(key){const n=Number(getItem(key));return Number.isFinite(n)&&n>0&&Date.now()-n<WEEK}
+ function open(){if(!overlay.hidden)return;previousFocus=document.activeElement;overlay.hidden=false;locked=document.body.style.overflow;document.body.style.overflow='hidden';close.focus()}
+ function dismiss(){if(overlay.hidden)return;overlay.hidden=true;document.body.style.overflow=locked;if(previousFocus&&typeof previousFocus.focus==='function')previousFocus.focus()}
+ close.addEventListener('click',dismiss);overlay.addEventListener('click',function(e){if(e.target===overlay)dismiss()});
+ document.addEventListener('keydown',function(e){if(overlay.hidden)return;if(e.key==='Escape'){dismiss();return}if(e.key==='Tab'){const f=[...dialog.querySelectorAll('button:not([disabled]),a[href]')].filter(x=>x.getClientRects().length);if(!f.length)return;const i=f.indexOf(document.activeElement);if(e.shiftKey&&(i<=0)){e.preventDefault();f[f.length-1].focus()}else if(!e.shiftKey&&(i===f.length-1||i<0)){e.preventDefault();f[0].focus()}}});
+ openBtn.addEventListener('click',open);bannerClose.addEventListener('click',function(){banner.hidden=true;setItem(BANNER_KEY,Date.now())});
+ copy.addEventListener('click',async function(){try{if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText('CCW20')}else{const t=document.createElement('textarea');t.value='CCW20';t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();if(!document.execCommand('copy'))throw Error('clipboard');t.remove()}copy.textContent='¡Copiado!';setTimeout(()=>copy.textContent='Copiar código',2200)}catch(e){copy.textContent='Código: CCW20';setTimeout(()=>copy.textContent='Copiar código',2800)}});
+ // Banner is persistent (not an auto-opened popup); only hides based on the visitor's
+ // own 7-day dismiss choice. The modal only ever opens on a deliberate click.
+ if(!recent(BANNER_KEY))banner.hidden=false;
+})();
+</script>
+<!-- FIN: CCW × SIMULAMOS -->
 </body>
 </html>

@@ -2786,6 +2786,13 @@ async function loadAll() {
     parsed.forEach(e => {
       e.date = normalizeDate(e.date);
     });
+
+    // Orden cronológico: fecha + hora (HH:MM, GMT-5); desempate por título
+    parsed.sort((a, b) =>
+      a.date.localeCompare(b.date) ||
+      a.time.localeCompare(b.time) ||
+      a.title.localeCompare(b.title)
+    );
 const currentWeek = WEEKS.find(w => w.key === 'current');
 const prevWeek = WEEKS.find(w => w.key === 'prev');
 
